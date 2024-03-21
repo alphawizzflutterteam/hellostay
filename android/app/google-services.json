@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "796501293724",
+    "project_id": "hellostay-468ce",
+    "storage_bucket": "hellostay-468ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796501293724:android:e7c40a4dca3229b2b44b59",
+        "android_client_info": {
+          "package_name": "com.hellostay.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmX7xXCFmiC59-Qp0WZUBDoJbLqiPTv50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
