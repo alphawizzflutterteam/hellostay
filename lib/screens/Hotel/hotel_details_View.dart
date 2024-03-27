@@ -340,24 +340,42 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                           SizedBox(
                             width: 20,
                           ),
-                          IgnorePointer(
+                          //  Text("${hotelDetailsResponse?.data!.reviewScore?.scoreTotal}"),
+                          // // Text("${widget.ratingD?.toDouble()}"),
+                          // IgnorePointer(
+                          //   ignoring: true,
+                          //   child: RatingBar.builder(
+                          //     initialRating:4.5
+                          //     //double.parse(hotelDetailsResponse?.data!.reviewScore?.scoreTotal.toString() ?? "0.0")
+                          //      ,
+                          //     minRating: 1,
+                          //     direction: Axis.horizontal,
+                          //     allowHalfRating: false,
+                          //     itemCount: 5,
+                          //     itemSize: 12.0,
+                          //     itemBuilder: (context, _) => Icon(
+                          //       Icons.star,
+                          //       color: Colors.amber,
+                          //     ),
+                          //     onRatingUpdate:
+                          //         (_) {}, // Provide an empty function to disable editing
+                          //   ),
+                          // ),
+                           IgnorePointer(
                             ignoring: true,
                             child: RatingBar.builder(
-                              initialRating: hotelDetailsResponse
-                                      ?.data!.starRate
-                                      ?.toDouble() ??
-                                  0.0,
+                              initialRating:double.parse(hotelDetailsResponse?.data!.reviewScore?.scoreTotal.toString() ?? "0.0"),
+
                               minRating: 1,
                               direction: Axis.horizontal,
-                              allowHalfRating: false,
+                              allowHalfRating: true, // Set to true to allow half ratings
                               itemCount: 5,
                               itemSize: 12.0,
                               itemBuilder: (context, _) => Icon(
                                 Icons.star,
                                 color: Colors.amber,
                               ),
-                              onRatingUpdate:
-                                  (_) {}, // Provide an empty function to disable editing
+                              onRatingUpdate: (_) {}, // Provide an empty function to disable editing
                             ),
                           )
 
@@ -383,7 +401,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                             width: 5.0,
                           ),
                           Text(
-                            'Total Review ${hotelDetailsResponse?.data!.starRate?.toDouble() ?? 0.0} ',
+                            'Total Review ${hotelDetailsResponse?.data!.reviewScore?.scoreTotal ?? 0.0} ',
                             style: const TextStyle(
                                 fontFamily: "rubic",
                                 color: Colors.black54,

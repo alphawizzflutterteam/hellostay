@@ -123,8 +123,8 @@ class _RoomDetailState extends State<RoomReview> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 300.0,
+            widget.room?.gallery?.isNotEmpty ?? false ? SizedBox(
+              height: 200.0,
               child: Material(
                 child: CarouselSlider.builder(
                   options: CarouselOptions(
@@ -148,7 +148,7 @@ class _RoomDetailState extends State<RoomReview> {
                             child: Stack(
                               children: [
                                 Image.network(
-                                  widget.room?.gallery?[index].large ?? '',
+                                  widget.room?.gallery?[index].large ?? '' ,
                                   fit: BoxFit.cover,
                                   width: 1000,
                                   height: 170,
@@ -177,7 +177,7 @@ class _RoomDetailState extends State<RoomReview> {
                   itemCount: widget.room?.gallery?.length ?? 0,
                 ),
               ),
-            ),
+            ) : SizedBox(),
 
             Padding(
               padding: const EdgeInsets.only(top: 15.0, left: 15.0),
@@ -354,7 +354,7 @@ class _RoomDetailState extends State<RoomReview> {
             const Padding(
               padding: EdgeInsets.only(top: 20.0, left: 20.0),
               child: Text(
-                'information',
+                'Information',
                 style: TextStyle(
                     fontFamily: "rubic",
                     fontSize: 16.0,
@@ -441,7 +441,7 @@ class _RoomDetailState extends State<RoomReview> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    'price',
+                    'Price',
                     style: TextStyle(
                         fontFamily: "rubic",
                         fontSize: 16.0,

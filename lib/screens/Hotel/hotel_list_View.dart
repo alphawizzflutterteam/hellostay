@@ -726,9 +726,9 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                           double.parse(a.price ?? '0.0')));
                                 }else {
                                   hotelList.sort((a, b) =>
-                                      (double.parse(b.reviewScore?.scoreTotal ?? '0.0'))
+                                      (double.parse(b.reviewScore?.scoreTotal.toString() ?? '0.0'))
                                           .compareTo(
-                                          double.parse(a.reviewScore?.scoreTotal ?? '0.0')));
+                                          double.parse(a.reviewScore?.scoreTotal.toString() ?? '0.0')));
                                 }
                                 Navigator.pop(context);
                                 setState(() {});
@@ -840,7 +840,7 @@ class card extends StatelessWidget {
         String title = list?[i].title ?? 'title';
         String type = list?[i].objectModel ?? 'title';
         // String type = list[i].data()['type'].toString();
-        double rating = double.parse( list?[i].reviewScore?.scoreTotal.toString()?? '4');
+        double rating = double.parse( list?[i].reviewScore?.scoreTotal.toString()?? '0');
         String location = list?[i].location?.name ?? 'location';
         /*  String image =
               'https://media-cdn.tripadvisor.com/media/photo-m/1280/21/dc/28/e0/fortune-pandiyan-hotel.jpg';*/
@@ -853,7 +853,7 @@ class card extends StatelessWidget {
         return InkWell(
           onTap: (){
             if(authToken !=null && authToken != ''){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>  HotelDetailsScreen(idD: id),));
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>  HotelDetailsScreen(idD: id,),));
             }else{
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  const LoginPage(),));
             }

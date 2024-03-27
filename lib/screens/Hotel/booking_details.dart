@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hellostay/model/booking_details_model.dart';
@@ -197,8 +197,8 @@ class _BookingDetailsState extends State<BookingDetails>
                                     ?.toDouble() ??
                                 0.0,
                             minRating: 1,
+                            allowHalfRating: true,
                             direction: Axis.horizontal,
-                            allowHalfRating: false,
                             itemCount: 5,
                             itemSize: 12.0,
                             itemBuilder: (context, _) => const Icon(
@@ -209,6 +209,7 @@ class _BookingDetailsState extends State<BookingDetails>
                                 (_) {}, // Provide an empty function to disable editing
                           ),
                         )
+
                       ],
                     ),
                     const SizedBox(
