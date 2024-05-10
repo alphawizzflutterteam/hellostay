@@ -633,7 +633,7 @@ class _MyprofileScrState extends State<MyprofileScr> {
                       actions: <Widget>[
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: AppColors.primary),
+                              backgroundColor: AppColors.primary),
                           child: const Text("YES",style: TextStyle(color: AppColors.white,fontFamily: 'rubic'),),
                           onPressed: () async {
                             setState(() {
@@ -650,7 +650,7 @@ class _MyprofileScrState extends State<MyprofileScr> {
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: AppColors.primary),
+                              backgroundColor: AppColors.primary),
                           child: const Text("NO",style: TextStyle(color: AppColors.white,fontFamily: 'rubic'),),
                           onPressed: () {
                             Navigator.of(context).pop();

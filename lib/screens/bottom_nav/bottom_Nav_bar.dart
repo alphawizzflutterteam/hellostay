@@ -95,14 +95,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   content: const Text("Are you sure you want to exit?"),
                   actions: <Widget>[
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: AppColors.primary),
+                      style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
                       child: const Text("YES", style: TextStyle(color: AppColors.whiteTemp),),
                       onPressed: () {
                         SystemNavigator.pop();
                       },
                     ),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: AppColors.primary),
+                      style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
                       child: const Text("NO",style: TextStyle(color: AppColors.whiteTemp)),
                       onPressed: () {
                         Navigator.of(context).pop();
