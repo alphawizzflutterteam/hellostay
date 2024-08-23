@@ -15,7 +15,6 @@ class TermsCondition extends StatefulWidget {
 }
 
 class _TermsConditionState extends State<TermsCondition> {
-
   String? terms;
 
   @override
@@ -24,11 +23,13 @@ class _TermsConditionState extends State<TermsCondition> {
     super.initState();
     getApi();
   }
+
   PrivacyModel? privacyModel;
 
-  getApi() async
-  {
-    var request = http.Request('GET', Uri.parse('${baseUrl1}page/terms-and-conditions')); http.StreamedResponse response = await request.send();
+  getApi() async {
+    var request =
+        http.Request('GET', Uri.parse('${baseUrl1}page/terms-conditions'));
+    http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       print("aaa");
       var result = await response.stream.bytesToString();
@@ -37,19 +38,15 @@ class _TermsConditionState extends State<TermsCondition> {
       print("cccc");
       //  print(await response.stream.bytesToString());
       setState(() {
-        terms=finaResult['data']['row']['content'].toString();
+        terms = finaResult['data']['row']['content'].toString();
         print(terms);
       });
-
-
-    }
-    else {
+    } else {
       print(response.reasonPhrase);
       print("api not run");
     }
-
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,21 +55,23 @@ class _TermsConditionState extends State<TermsCondition> {
         centerTitle: true,
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.whiteTemp,
-
-        title:  Text('Terms & Conditions',
-
+        title: Text(
+          'Terms & Conditions',
           style: TextStyle(
-              fontFamily: "rubic",
-              fontSize: 20.0,
-              color: AppColors.white),
+              fontFamily: "rubic", fontSize: 20.0, color: AppColors.white),
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            terms==null||terms==""?Center(child: CircularProgressIndicator(color: Colors.black,),):
-            Html(data: "${terms}")
+            terms == null || terms == ""
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.black,
+                    ),
+                  )
+                : Html(data: "${terms}")
           ],
         ),
       ),

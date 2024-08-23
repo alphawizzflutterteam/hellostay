@@ -8,11 +8,11 @@ class BookingDetailsmodel {
 
   BookingDetailsmodel.fromJson(Map<String, dynamic> json) {
     booking =
-    json['booking'] != null ? new Booking.fromJson(json['booking']) : null;
+        json['booking'] != null ? new Booking.fromJson(json['booking']) : null;
     service =
-    json['service'] != null ? new Service.fromJson(json['service']) : null;
+        json['service'] != null ? new Service.fromJson(json['service']) : null;
     gateway =
-    json['gateway'] != null ? new Gateway.fromJson(json['gateway']) : null;
+        json['gateway'] != null ? new Gateway.fromJson(json['gateway']) : null;
     status = json['status'];
   }
 
@@ -49,7 +49,7 @@ class Booking {
   String? status;
   dynamic deposit;
   dynamic depositType;
-  int? commission;
+  String? commission;
   String? commissionType;
   String? email;
   String? firstName;
@@ -87,56 +87,56 @@ class Booking {
 
   Booking(
       {this.id,
-        this.code,
-        this.vendorId,
-        this.customerId,
-        this.paymentId,
-        this.gateway,
-        this.objectId,
-        this.objectModel,
-        this.startDate,
-        this.endDate,
-        this.total,
-        this.totalGuests,
-        this.currency,
-        this.status,
-        this.deposit,
-        this.depositType,
-        this.commission,
-        this.commissionType,
-        this.email,
-        this.firstName,
-        this.lastName,
-        this.phone,
-        this.address,
-        this.address2,
-        this.city,
-        this.state,
-        this.zipCode,
-        this.country,
-        this.customerNotes,
-        this.vendorServiceFeeAmount,
-        this.vendorServiceFee,
-        this.createUser,
-        this.updateUser,
-        this.deletedAt,
-        this.createdAt,
-        this.updatedAt,
-        this.buyerFees,
-        this.totalBeforeFees,
-        this.paidVendor,
-        this.objectChildId,
-        this.number,
-        this.paid,
-        this.payNow,
-        this.walletCreditUsed,
-        this.walletTotalUsed,
-        this.walletTransactionId,
-        this.isRefundWallet,
-        this.isPaid,
-        this.totalBeforeDiscount,
-        this.couponAmount,
-        this.service});
+      this.code,
+      this.vendorId,
+      this.customerId,
+      this.paymentId,
+      this.gateway,
+      this.objectId,
+      this.objectModel,
+      this.startDate,
+      this.endDate,
+      this.total,
+      this.totalGuests,
+      this.currency,
+      this.status,
+      this.deposit,
+      this.depositType,
+      this.commission,
+      this.commissionType,
+      this.email,
+      this.firstName,
+      this.lastName,
+      this.phone,
+      this.address,
+      this.address2,
+      this.city,
+      this.state,
+      this.zipCode,
+      this.country,
+      this.customerNotes,
+      this.vendorServiceFeeAmount,
+      this.vendorServiceFee,
+      this.createUser,
+      this.updateUser,
+      this.deletedAt,
+      this.createdAt,
+      this.updatedAt,
+      this.buyerFees,
+      this.totalBeforeFees,
+      this.paidVendor,
+      this.objectChildId,
+      this.number,
+      this.paid,
+      this.payNow,
+      this.walletCreditUsed,
+      this.walletTotalUsed,
+      this.walletTransactionId,
+      this.isRefundWallet,
+      this.isPaid,
+      this.totalBeforeDiscount,
+      this.couponAmount,
+      this.service});
 
   Booking.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -155,7 +155,7 @@ class Booking {
     status = json['status'];
     deposit = json['deposit'];
     depositType = json['deposit_type'];
-    commission = json['commission'];
+    commission = json['commission'].toString();
     commissionType = json['commission_type'];
     email = json['email'];
     firstName = json['first_name'];
@@ -190,7 +190,7 @@ class Booking {
     totalBeforeDiscount = json['total_before_discount'];
     couponAmount = json['coupon_amount'];
     service =
-    json['service'] != null ? new Service.fromJson(json['service']) : null;
+        json['service'] != null ? new Service.fromJson(json['service']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -294,43 +294,43 @@ class Service {
 
   Service(
       {this.id,
-        this.title,
-        this.slug,
-        this.content,
-        this.imageId,
-        this.bannerImageId,
-        this.locationId,
-        this.address,
-        this.mapLat,
-        this.mapLng,
-        this.mapZoom,
-        this.isFeatured,
-        this.gallery,
-        this.video,
-        this.policy,
-        this.starRate,
-        this.price,
-        this.checkInTime,
-        this.checkOutTime,
-        this.allowFullDay,
-        this.salePrice,
-        this.status,
-        this.createUser,
-        this.updateUser,
-        this.deletedAt,
-        this.createdAt,
-        this.updatedAt,
-        this.reviewScore,
-        this.icalImportUrl,
-        this.enableExtraPrice,
-        this.extraPrice,
-        this.enableServiceFee,
-        this.serviceFee,
-        this.surrounding,
-        this.badgeTags,
-        this.authorId,
-        this.minDayBeforeBooking,
-        this.minDayStays});
+      this.title,
+      this.slug,
+      this.content,
+      this.imageId,
+      this.bannerImageId,
+      this.locationId,
+      this.address,
+      this.mapLat,
+      this.mapLng,
+      this.mapZoom,
+      this.isFeatured,
+      this.gallery,
+      this.video,
+      this.policy,
+      this.starRate,
+      this.price,
+      this.checkInTime,
+      this.checkOutTime,
+      this.allowFullDay,
+      this.salePrice,
+      this.status,
+      this.createUser,
+      this.updateUser,
+      this.deletedAt,
+      this.createdAt,
+      this.updatedAt,
+      this.reviewScore,
+      this.icalImportUrl,
+      this.enableExtraPrice,
+      this.extraPrice,
+      this.enableServiceFee,
+      this.serviceFee,
+      this.surrounding,
+      this.badgeTags,
+      this.authorId,
+      this.minDayBeforeBooking,
+      this.minDayStays});
 
   Service.fromJson(Map<String, dynamic> json) {
     id = json['id'];

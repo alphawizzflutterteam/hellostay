@@ -545,102 +545,120 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                     ),
 
                     ///Amenities
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0.0, left: 20.0, right: 20.0, bottom: 0.0),
-                      child: Column(
-                        children: [
-                          Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: List<Widget>.generate(
-                                  !showAll
-                                      ? 1
-                                      : hotelDetailsResponse
-                                              ?.data.terms?.length ??
-                                          0, (index) {
-                                var item =
-                                    hotelDetailsResponse?.data.terms?[index];
-
-                                return Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10.0, left: 10.0, bottom: 0.0),
-                                  child: Column(
+                    hotelDetailsResponse?.data.terms?.isNotEmpty ?? false
+                        ? Padding(
+                            padding: const EdgeInsets.only(
+                                top: 0.0, left: 20.0, right: 20.0, bottom: 0.0),
+                            child: Column(
+                              children: [
+                                Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        item?.title ?? '',
-                                        style: const TextStyle(
-                                            fontFamily: "rubic",
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.w700),
-                                        textAlign: TextAlign.justify,
-                                      ),
-                                      Wrap(
-                                        children: List<Widget>.generate(
-                                          !showAll
-                                              ? 4
-                                              : item?.child.length ?? 0,
-                                          (index) {
-                                            return Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const Text(
-                                                  "-   ",
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 18.0,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      1.3,
-                                                  child: Text(
-                                                    item?.child[index].title ??
-                                                        '',
-                                                    style: const TextStyle(
-                                                      fontFamily: "rubic",
-                                                      color: Colors.black54,
-                                                      fontSize: 16.0,
-                                                    ),
-                                                    overflow: TextOverflow.clip,
-                                                  ),
-                                                ),
-                                              ],
-                                            );
-                                          },
+                                    children: List<Widget>.generate(
+                                        !showAll
+                                            ? 1
+                                            : hotelDetailsResponse
+                                                    ?.data.terms?.length ??
+                                                0, (index) {
+                                      var item = hotelDetailsResponse
+                                          ?.data.terms?[index];
+
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 10.0, left: 10.0, bottom: 0.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              item?.title ?? '',
+                                              style: const TextStyle(
+                                                  fontFamily: "rubic",
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.w700),
+                                              textAlign: TextAlign.justify,
+                                            ),
+                                            Wrap(
+                                              children: List<Widget>.generate(
+                                                !showAll
+                                                    ? 0
+                                                    : item?.child.length ?? 0,
+                                                (index) {
+                                                  return Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "-   ",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 18.0,
+                                                        ),
+                                                      ),
+                                                      item?.child.isNotEmpty ??
+                                                              false
+                                                          ? SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  1.3,
+                                                              child: Text(
+                                                                item?.child[index]
+                                                                        .title ??
+                                                                    '',
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontFamily:
+                                                                      "rubic",
+                                                                  color: Colors
+                                                                      .black54,
+                                                                  fontSize:
+                                                                      16.0,
+                                                                ),
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .clip,
+                                                              ),
+                                                            )
+                                                          : SizedBox(),
+                                                    ],
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ],
                                         ),
+                                      );
+                                    }).toList()),
+                                InkWell(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      Text(
+                                        !showAll
+                                            ? "...show more"
+                                            : "...show less",
+                                        style: const TextStyle(
+                                            color: Colors.blue,
+                                            fontFamily: 'rubic'),
                                       ),
                                     ],
                                   ),
-                                );
-                              }).toList()),
-                          InkWell(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                Text(
-                                  !showAll ? "...show more" : "...show less",
-                                  style: const TextStyle(
-                                      color: Colors.blue, fontFamily: 'rubic'),
-                                ),
+                                  onTap: () {
+                                    setState(() {
+                                      showAll = !showAll;
+                                    });
+                                  },
+                                )
                               ],
                             ),
-                            onTap: () {
-                              setState(() {
-                                showAll = !showAll;
-                              });
-                            },
                           )
-                        ],
-                      ),
-                    ),
+                        : SizedBox(),
 
                     /// Location
                     _location,
