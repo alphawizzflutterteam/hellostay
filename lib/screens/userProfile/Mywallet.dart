@@ -137,7 +137,7 @@ print("addddddddddddddd");
    var headers = {
      'Authorization': 'Bearer ${token}'
    };
-   var request = http.MultipartRequest('POST', Uri.parse('https://hotelbooking.alphawizzserver.com/api/auth/add-wallet-amount'));
+   var request = http.MultipartRequest('POST', Uri.parse('https://hellostay.com/api/auth/add-wallet-amount'));
    request.fields.addAll({
      'amount': addAmountCtr.text
    });

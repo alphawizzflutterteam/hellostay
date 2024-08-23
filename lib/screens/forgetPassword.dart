@@ -137,7 +137,6 @@ class _forgotPasswordState extends State<forgotPassword> {
   var otp;
   bool isLoading = false;
 
-
   TextEditingController mobilecontroller = TextEditingController();
 
   void loginmobileApi() {
@@ -156,7 +155,7 @@ class _forgotPasswordState extends State<forgotPassword> {
       print("mobile");
       if (error == 1) {
         // var otp = getData['data'].toString();
-        customSnackbar(context, msg.toString());
+        // customSnackbar(context, msg.toString());
         Navigator.push(
             context,
             MaterialPageRoute(

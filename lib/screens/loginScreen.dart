@@ -69,10 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                     Center(
                       child: const Text(
                         "Welcome to HELLOSTAY",
-                           style: TextStyle(
-                          fontSize: 16,
-                             fontFamily: "rubic"
-                        ),
+                        style: TextStyle(fontSize: 16, fontFamily: "rubic"),
                       ),
                     ),
                     const SizedBox(
@@ -80,9 +77,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const Text(
                       "Please Login/ Register using your Email/ Mobile to continue",
-                         style: TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
-                           //fontFamily: "rubic"
+                        //fontFamily: "rubic"
                       ),
                     ),
                     const SizedBox(
@@ -153,8 +150,8 @@ class _LoginPageState extends State<LoginPage> {
                                   borderSide: const BorderSide(
                                       color: AppColors.whiteTemp, width: 2)),
                               focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: AppColors.whiteTemp),
+                                borderSide: const BorderSide(
+                                    color: AppColors.whiteTemp),
                                 borderRadius: BorderRadius.circular(25),
                               ),
                             ),
@@ -192,8 +189,8 @@ class _LoginPageState extends State<LoginPage> {
                                   borderSide: const BorderSide(
                                       color: AppColors.whiteTemp, width: 2)),
                               focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: AppColors.whiteTemp),
+                                borderSide: const BorderSide(
+                                    color: AppColors.whiteTemp),
                                 borderRadius: BorderRadius.circular(25),
                               ),
                             ),
@@ -253,8 +250,8 @@ class _LoginPageState extends State<LoginPage> {
                                   borderSide: const BorderSide(
                                       color: AppColors.whiteTemp, width: 2)),
                               focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: AppColors.whiteTemp),
+                                borderSide: const BorderSide(
+                                    color: AppColors.whiteTemp),
                                 borderRadius: BorderRadius.circular(25),
                               ),
                             ),
@@ -363,7 +360,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-var fcmToken;
+  var fcmToken;
 
   getFCM() async {
     final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
@@ -371,6 +368,7 @@ var fcmToken;
       fcmToken = await _firebaseMessaging.getToken() ?? "";
     } on FirebaseException {}
   }
+
   void loginemailApi() {
     setState(() {
       isLoading = true;
@@ -380,18 +378,17 @@ var fcmToken;
       'email': emailC.text.toString(),
       'password': passwordC.text.toString(),
       'fcm_id': '12345678',
-      'device_name':'1'
+      'device_name': '1'
     };
 
     apiBaseHelper.postAPICall(loginApi, param).then((getData) async {
       int error = getData['status'];
       String msg = getData['message'].toString();
       print("email");
-      if (error == 1 ) {
-
+      if (error == 1) {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('userToken', '${getData['access_token']}');
-        authToken = getData['access_token'] ;
+        authToken = getData['access_token'];
 
         /*customSnackbar(context, msg.toString());
         Navigator.pushReplacement(
@@ -424,6 +421,7 @@ var fcmToken;
 
     getFCM();
   }
+
   void loginmobileApi() {
     setState(() {
       isLoading = true;
@@ -440,7 +438,7 @@ var fcmToken;
       print("mobile");
       if (error == 1) {
         // var otp = getData['data'].toString();
-        customSnackbar(context, msg.toString());
+        // customSnackbar(context, msg.toString());
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -484,6 +482,4 @@ var fcmToken;
   final emailC = TextEditingController();
   final passwordC = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
-
 }

@@ -30,171 +30,176 @@ class _AddBankDetailsState extends State<AddBankDetails> {
       case 1:
         return Form(
           key: _formKey,
-
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 55,
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.supportColor),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                Container(
-                  height: 55,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.supportColor),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    controller: AmountController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return '   Enter Amount';
-                      }
-            
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 10, bottom: 3),
-                      // isDense: true,
-                      border: InputBorder.none,
-                      hintText: ' Enter Amount',
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: 55,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.supportColor),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextFormField(
-                    controller: BankNameController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return '   Enter Bank Name';
-                      }
-            
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 10, bottom: 3),
-                      // isDense: true,
-                      border: InputBorder.none,
-                      hintText: ' Bank Name',
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Container(
-                  height: 55,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.supportColor),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextFormField(
-                    controller: AccountHolderNameController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return '   Enter Account Holder  Name';
-                      }
-            
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 10, bottom: 3),
-                      // isDense: true,
-                      border: InputBorder.none,
-                      hintText: '  Account Holder Name',
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Container(
-                  height: 55,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.supportColor),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    controller: AccountNoController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return '     Enter Account Number';
-                      }
-                      // else if (value.length < 10 || value.length > 10) {
-                      //   return '     Enter Valid Mobile Number';
-                      // }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 10, bottom: 3),
-                        // isDense: true,
-                        border: InputBorder.none,
-                        hintText: '  Account Number'
-                        // label: Text('   Number'),
-                        // border: OutlineInputBorder(
-                        //   borderRadius: BorderRadius.circular(15),
-                        // ),
-                        ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Container(
-                  height: 55,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.supportColor),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: TextFormField(
-                    //keyboardType: TextInputType.number,
-                    controller: ifscCodeController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return '     Enter IFSC  CODE';
-                      }
-                      // else if (value.length < 10 || value.length > 10) {
-                      //   return '     Enter Valid Mobile Number';
-                      // }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 10, bottom: 3),
-                        // isDense: true,
-                        border: InputBorder.none,
-                        hintText: '  IFSC CODE'
-                        // label: Text('   Number'),
-                        // border: OutlineInputBorder(
-                        //   borderRadius: BorderRadius.circular(15),
-                        // ),
-                        ),
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                InkWell(
-                  onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      withdrawalApi();
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  controller: AmountController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return '   Enter Amount';
                     }
-                  },
-                  child: Container(
-                    height: 50,
-                    width: 200,
-                    decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                        child: Text(
-                      "SUBMIT",
-                      style: TextStyle(color: AppColors.white, fontSize: 16,fontFamily: "rubic"),
-                    )),
-                  ),
-                )
-              ],
-            ),
 
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(left: 10, bottom: 3),
+                    // isDense: true,
+                    border: InputBorder.none,
+                    hintText: ' Enter Amount',
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 55,
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.supportColor),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TextFormField(
+                  controller: BankNameController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return '   Enter Bank Name';
+                    }
+
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(left: 10, bottom: 3),
+                    // isDense: true,
+                    border: InputBorder.none,
+                    hintText: ' Bank Name',
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                height: 55,
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.supportColor),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TextFormField(
+                  controller: AccountHolderNameController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return '   Enter Account Holder  Name';
+                    }
+
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(left: 10, bottom: 3),
+                    // isDense: true,
+                    border: InputBorder.none,
+                    hintText: '  Account Holder Name',
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                height: 55,
+                decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.supportColor),
+                    borderRadius: BorderRadius.circular(10)),
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  controller: AccountNoController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return '     Enter Account Number';
+                    }
+                    // else if (value.length < 10 || value.length > 10) {
+                    //   return '     Enter Valid Mobile Number';
+                    // }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 10, bottom: 3),
+                      // isDense: true,
+                      border: InputBorder.none,
+                      hintText: '  Account Number'
+                      // label: Text('   Number'),
+                      // border: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.circular(15),
+                      // ),
+                      ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                height: 55,
+                decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.supportColor),
+                    borderRadius: BorderRadius.circular(10)),
+                child: TextFormField(
+                  //keyboardType: TextInputType.number,
+                  controller: ifscCodeController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return '     Enter IFSC  CODE';
+                    }
+                    // else if (value.length < 10 || value.length > 10) {
+                    //   return '     Enter Valid Mobile Number';
+                    // }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 10, bottom: 3),
+                      // isDense: true,
+                      border: InputBorder.none,
+                      hintText: '  IFSC CODE'
+                      // label: Text('   Number'),
+                      // border: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.circular(15),
+                      // ),
+                      ),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              isLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : InkWell(
+                      onTap: () {
+                        if (_formKey.currentState!.validate()) {
+                          withdrawalApi();
+                        }
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Center(
+                            child: isLoading
+                                ? CircularProgressIndicator()
+                                : Text(
+                                    "SUBMIT",
+                                    style: TextStyle(
+                                        color: AppColors.white,
+                                        fontSize: 16,
+                                        fontFamily: "rubic"),
+                                  )),
+                      ),
+                    )
+            ],
+          ),
         );
         break;
 
@@ -268,42 +273,50 @@ class _AddBankDetailsState extends State<AddBankDetails> {
               SizedBox(
                 height: 30,
               ),
-              InkWell(
-                onTap: () {
-                  if (_formKey1.currentState!.validate()) {
-                    withdrawalApi();
-                  }
-                },
-                child: Container(
-                  height: 50,
-                  width: 200,
-                  decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                      child: Text(
-                    "SUBMIT",
-                    style: TextStyle(color: AppColors.white, fontSize: 16,fontFamily: "rubic"),
-                  )),
-                ),
-              )
+              isLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : InkWell(
+                      onTap: () {
+                        if (_formKey1.currentState!.validate()) {
+                          withdrawalApi();
+                        }
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Center(
+                            child: Text(
+                          "SUBMIT",
+                          style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 16,
+                              fontFamily: "rubic"),
+                        )),
+                      ),
+                    )
             ],
           ),
         );
     }
   }
 
+  bool isLoading = false;
   withdrawalApi() async {
-    String upiIdDeatils='UPI Id: ${upiIdController.text}';
-    String bankDetils = 'Banke Name: ${BankNameController.text}, Account Holder Name: ${AccountHolderNameController.text}, Account Number: ${AccountNoController.text},IFSC Code: ${ifscCodeController.text}';
+    isLoading = true;
+    setState(() {});
+    String upiIdDeatils = 'UPI Id: ${upiIdController.text}';
+    String bankDetils =
+        'Banke Name: ${BankNameController.text}, Account Holder Name: ${AccountHolderNameController.text}, Account Number: ${AccountNoController.text},IFSC Code: ${ifscCodeController.text}';
     var headers = {'Authorization': 'Bearer ${authToken}'};
     var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(
-            'https://hotelbooking.alphawizzserver.com/api/auth/add-wallet-request'));
+        'POST', Uri.parse('https://hellostay.com/api/auth/add-wallet-request'));
     request.fields.addAll({
-      'amount': selectedOption==1?AmountController.text : AmountController1.text,
-      'description': selectedOption==1?bankDetils : upiIdDeatils
+      'amount':
+          selectedOption == 1 ? AmountController.text : AmountController1.text,
+      'description': selectedOption == 1 ? bankDetils : upiIdDeatils
     });
 
     request.headers.addAll(headers);
@@ -323,6 +336,8 @@ class _AddBankDetailsState extends State<AddBankDetails> {
         Fluttertoast.showToast(msg: "${finaResult['message']}");
         Navigator.pop(context);
       }
+      isLoading = false;
+      setState(() {});
     } else {
       print("cccc-----");
       print(response.reasonPhrase);
@@ -336,19 +351,16 @@ class _AddBankDetailsState extends State<AddBankDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        backgroundColor: AppColors.primary,
-        foregroundColor: AppColors.whiteTemp,
-
-        title:  const Text('Add Bank Details',
-
-        style: TextStyle(
-        fontFamily: "rubic",
-        fontSize: 20.0,
-        color: AppColors.white),
-    )
-        ),  body: SingleChildScrollView(
+            elevation: 0,
+            centerTitle: true,
+            backgroundColor: AppColors.primary,
+            foregroundColor: AppColors.whiteTemp,
+            title: const Text(
+              'Add Bank Details',
+              style: TextStyle(
+                  fontFamily: "rubic", fontSize: 20.0, color: AppColors.white),
+            )),
+        body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -357,11 +369,16 @@ class _AddBankDetailsState extends State<AddBankDetails> {
                   children: [
                     Expanded(
                       child: RadioListTile(
-                        title: Text('BANK',style: TextStyle(fontFamily: "rubic",fontSize: 16,),),
+                        title: Text(
+                          'BANK',
+                          style: TextStyle(
+                            fontFamily: "rubic",
+                            fontSize: 16,
+                          ),
+                        ),
                         value: 1,
                         groupValue: selectedOption,
                         activeColor: AppColors.primary,
-
                         onChanged: (value) {
                           setState(() {
                             selectedOption = value!;
@@ -372,7 +389,11 @@ class _AddBankDetailsState extends State<AddBankDetails> {
                     ),
                     Expanded(
                       child: RadioListTile(
-                        title: Text('UPI',style: TextStyle(fontFamily: "rubic",fontSize: 16,)),
+                        title: Text('UPI',
+                            style: TextStyle(
+                              fontFamily: "rubic",
+                              fontSize: 16,
+                            )),
                         value: 2,
                         groupValue: selectedOption,
                         activeColor: AppColors.primary,

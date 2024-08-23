@@ -113,7 +113,7 @@ class _RoomDetailState extends State<RoomReview> {
             color: AppColors.blackTemp,
             fontFamily: "rubic",
             fontSize: 20,
-         //   fontWeight: FontWeight.w600,
+            //   fontWeight: FontWeight.w600,
             //fontSize: 30
           ),
         ),
@@ -123,61 +123,65 @@ class _RoomDetailState extends State<RoomReview> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            widget.room?.gallery?.isNotEmpty ?? false ? SizedBox(
-              height: 200.0,
-              child: Material(
-                child: CarouselSlider.builder(
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    aspectRatio: 14 / 8.5,
-                    viewportFraction: 0.8,
-                    enlargeCenterPage: true,
-                    autoPlayAnimationDuration: const Duration(seconds: 2),
-                    autoPlayInterval: const Duration(seconds: 4),
-                    autoPlayCurve: Curves.easeInOutSine,
-                    onPageChanged: (index, reason) {
-                      _current = index;
-                    },
-                    scrollPhysics: const BouncingScrollPhysics(),
-                  ),
-                  itemBuilder: (context, index, realIndex) {
-                    return index == _current
-                        ? ClipRRect(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.0)),
-                            child: Stack(
-                              children: [
-                                Image.network(
-                                  widget.room?.gallery?[index].large ?? '' ,
-                                  fit: BoxFit.cover,
-                                  width: 1000,
-                                  height: 170,
+            widget.room?.gallery?.isNotEmpty ?? false
+                ? SizedBox(
+                    height: 200.0,
+                    child: Material(
+                      child: CarouselSlider.builder(
+                        options: CarouselOptions(
+                          autoPlay: true,
+                          aspectRatio: 14 / 8.5,
+                          viewportFraction: 0.8,
+                          enlargeCenterPage: true,
+                          autoPlayAnimationDuration: const Duration(seconds: 2),
+                          autoPlayInterval: const Duration(seconds: 4),
+                          autoPlayCurve: Curves.easeInOutSine,
+                          onPageChanged: (index, reason) {
+                            _current = index;
+                          },
+                          scrollPhysics: const BouncingScrollPhysics(),
+                        ),
+                        itemBuilder: (context, index, realIndex) {
+                          return index == _current
+                              ? ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5.0)),
+                                  child: Stack(
+                                    children: [
+                                      Image.network(
+                                        widget.room?.gallery?[index].large ??
+                                            '',
+                                        fit: BoxFit.cover,
+                                        width: 1000,
+                                        height: 170,
+                                      )
+                                    ],
+                                  ),
                                 )
-                              ],
-                            ),
-                          )
-                        : Padding(
-                            padding: const EdgeInsets.only(top: 25),
-                            child: ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(5.0)),
-                              child: Stack(
-                                children: [
-                                  Image.network(
-                                    widget.room?.gallery?[index].large ?? '',
-                                    fit: BoxFit.cover,
-                                    width: 1000,
-                                    height: 172,
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                  },
-                  itemCount: widget.room?.gallery?.length ?? 0,
-                ),
-              ),
-            ) : SizedBox(),
+                              : Padding(
+                                  padding: const EdgeInsets.only(top: 25),
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(5.0)),
+                                    child: Stack(
+                                      children: [
+                                        Image.network(
+                                          widget.room?.gallery?[index].large ??
+                                              '',
+                                          fit: BoxFit.cover,
+                                          width: 1000,
+                                          height: 172,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                        },
+                        itemCount: widget.room?.gallery?.length ?? 0,
+                      ),
+                    ),
+                  )
+                : SizedBox(),
 
             Padding(
               padding: const EdgeInsets.only(top: 15.0, left: 15.0),
@@ -278,7 +282,8 @@ class _RoomDetailState extends State<RoomReview> {
                 mainAxisSpacing: 5,
                 crossAxisSpacing: 5,
                 crossAxisCount: 3,
-                children: List<Widget>.generate(widget.room?.termFeatures?.length ?? 0, (index) {
+                children: List<Widget>.generate(
+                    widget.room?.termFeatures?.length ?? 0, (index) {
                   var item = widget.room?.termFeatures?[index];
                   return Column(
                     children: [
@@ -377,7 +382,7 @@ class _RoomDetailState extends State<RoomReview> {
                           AssetImage('assets/icons/roomSize.png')),
                     ),
                     SizedBox(
-                      width: 60,
+                        width: 60,
                         child: Html(data: widget.room?.sizeHtml ?? '')),
                   ],
                 ),
@@ -388,7 +393,7 @@ class _RoomDetailState extends State<RoomReview> {
                       decoration: BoxDecoration(
                           border: Border.all(
                               color:
-                              AppColors.faqanswerColor.withOpacity(0.5))),
+                                  AppColors.faqanswerColor.withOpacity(0.5))),
                       child: const Icon(Icons.bed),
                     ),
                     SizedBox(
@@ -403,7 +408,7 @@ class _RoomDetailState extends State<RoomReview> {
                       decoration: BoxDecoration(
                           border: Border.all(
                               color:
-                              AppColors.faqanswerColor.withOpacity(0.5))),
+                                  AppColors.faqanswerColor.withOpacity(0.5))),
                       child: const Icon(Icons.people_alt),
                     ),
                     SizedBox(
@@ -418,7 +423,7 @@ class _RoomDetailState extends State<RoomReview> {
                       decoration: BoxDecoration(
                           border: Border.all(
                               color:
-                              AppColors.faqanswerColor.withOpacity(0.5))),
+                                  AppColors.faqanswerColor.withOpacity(0.5))),
                       child: const Icon(Icons.boy),
                     ),
                     SizedBox(
@@ -464,7 +469,11 @@ class _RoomDetailState extends State<RoomReview> {
                   left: 15.0, right: 15.0, bottom: 10.0, top: 20.0),
               child: InkWell(
                 onTap: () async {
-                  addToCartRoom(widget.room?.id.toString() ?? "",widget.room?.image ??"" ,widget.room?.title ?? "",widget.room!);
+                  addToCartRoom(
+                      widget.room?.id.toString() ?? "",
+                      widget.room?.image ?? "",
+                      widget.room?.title ?? "",
+                      widget.room!);
                   /*for (int i = 0;
                       i <
                           int.parse(reviewRoomResponse
@@ -476,8 +485,7 @@ class _RoomDetailState extends State<RoomReview> {
                       type: "ADULT ${i + 1}",
                     ));
                   }*/
-                //  addToCartRoom();
-
+                  //  addToCartRoom();
                 },
                 child: Container(
                   height: 55.0,
@@ -495,7 +503,7 @@ class _RoomDetailState extends State<RoomReview> {
                       //     stops: [0.0, 1.0],
                       //     tileMode: TileMode.clamp)
 
-                  ),
+                      ),
                   child: const Center(
                     child: Text(
                       'Book Now',
@@ -514,19 +522,21 @@ class _RoomDetailState extends State<RoomReview> {
       ),
     );
   }
+
   String? ulr;
-  Future<void> addToCartRoom(String roomId,String img ,String title,Room rooms) async {
+  Future<void> addToCartRoom(
+      String roomId, String img, String title, Room rooms) async {
     print("gopl-------------");
     var param = {
       'service_type': 'hotel',
       'service_id': '${widget.idD}',
       'rooms': '[{"id":"${roomId}","number_selected":"${room}"}]',
       'start_date':
-      DateFormat('yyyy-MM-dd').format(DateTime.parse(checkInDate)),
+          DateFormat('yyyy-MM-dd').format(DateTime.parse(checkInDate)),
       'end_date': DateFormat('yyyy-MM-dd').format(DateTime.parse(checkOutDate)),
       'adults': '${adultCount1}',
       'children': '${childrenCount1}',
-      'room_amount':rooms.totalPriceInString ?? "0"
+      'room_amount': rooms.totalPriceInString ?? "0"
     };
     List<Map<String, String>> guestsList = [];
     for (int i = 0; i < adultCountList.length; i++) {
@@ -550,10 +560,18 @@ class _RoomDetailState extends State<RoomReview> {
 
       if (status.toString() == '1') {
         ulr = value['url'];
-        //   https://hotelbooking.alphawizzserver.com/api/booking/02edafa5f093ff99fef7836b0963d2b0/checkout?token=39|0RQIduOQh5ZHasnEEJgYH2dtP3Hp1MOSPt1GtBA244f38060
+        //   https://hellostay.com/api/booking/02edafa5f093ff99fef7836b0963d2b0/checkout?token=39|0RQIduOQh5ZHasnEEJgYH2dtP3Hp1MOSPt1GtBA244f38060
         String neurl = ulr! + '?' + 'token=${authToken}';
 
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>BookNowDetails(imageUrl: img,title: title,bookingId: bookingCode,rooms: rooms,)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BookNowDetails(
+                      imageUrl: img,
+                      title: title,
+                      bookingId: bookingCode,
+                      rooms: rooms,
+                    )));
         // Navigator.push(
         //     context,
         //     MaterialPageRoute(
@@ -575,54 +593,53 @@ class _RoomDetailState extends State<RoomReview> {
   }
 
 //  String? ulr ;
- // Future<void> addToCartRoom() async{
- //
- //   var param = {
- //     'service_type': 'hotel',
- //     'service_id': '${widget.idD}',
- //     'rooms': '[{"id":"${widget.room?.id}","number_selected":"${room}"}]',
- //     'start_date': DateFormat('yyyy-MM-dd').format(DateTime.parse(checkInDate)),
- //     'end_date': DateFormat('yyyy-MM-dd').format(DateTime.parse(checkOutDate)),
- //     'adults': '${adultCount1}',
- //     'children': '${childrenCount1}',
- //   };
- //   List<Map<String, String>> guestsList = [];
- //   for (int i = 0; i < adultCountList.length; i++) {
- //     Map<String, String> guestData = {
- //       'tot_adults[$i]': adultCountList[i].toString(),
- //       'tot_children[$i]': childrenCountList[i].toString(),
- //       'children_age[$i]': childrenCountListOfList[i].toString()
- //     };
- //     guestsList.add(guestData);
- //   }
- //
- //   var data = addMapListToData(param, guestsList);
- //    apiBaseHelper.postAPICall(getAddToCartApi, data).then((value) {
- //
- //      log('${value}');
- //
- //      var status = value['status'];
- //
- //      if(status.toString() == '1'){
- //
- //        ulr = value['url'];
- //     //   https://hotelbooking.alphawizzserver.com/api/booking/02edafa5f093ff99fef7836b0963d2b0/checkout?token=39|0RQIduOQh5ZHasnEEJgYH2dtP3Hp1MOSPt1GtBA244f38060
- //        String neurl = ulr!+'?'+'token=${authToken}';
- //        Navigator.push(context, MaterialPageRoute(builder: (context) =>  WebViewExample( url: neurl,)));
- //
- //      }
- //
- //    });
- // }
- //
- //  Map<String, String> addMapListToData(
- //      Map<String, String> data, List<Map<String, dynamic>> mapList) {
- //    for (var map in mapList) {
- //      map.forEach((key, value) {
- //        data[key] = value;
- //      });
- //    }
- //    return data;
- //  }
-
+  // Future<void> addToCartRoom() async{
+  //
+  //   var param = {
+  //     'service_type': 'hotel',
+  //     'service_id': '${widget.idD}',
+  //     'rooms': '[{"id":"${widget.room?.id}","number_selected":"${room}"}]',
+  //     'start_date': DateFormat('yyyy-MM-dd').format(DateTime.parse(checkInDate)),
+  //     'end_date': DateFormat('yyyy-MM-dd').format(DateTime.parse(checkOutDate)),
+  //     'adults': '${adultCount1}',
+  //     'children': '${childrenCount1}',
+  //   };
+  //   List<Map<String, String>> guestsList = [];
+  //   for (int i = 0; i < adultCountList.length; i++) {
+  //     Map<String, String> guestData = {
+  //       'tot_adults[$i]': adultCountList[i].toString(),
+  //       'tot_children[$i]': childrenCountList[i].toString(),
+  //       'children_age[$i]': childrenCountListOfList[i].toString()
+  //     };
+  //     guestsList.add(guestData);
+  //   }
+  //
+  //   var data = addMapListToData(param, guestsList);
+  //    apiBaseHelper.postAPICall(getAddToCartApi, data).then((value) {
+  //
+  //      log('${value}');
+  //
+  //      var status = value['status'];
+  //
+  //      if(status.toString() == '1'){
+  //
+  //        ulr = value['url'];
+  //     //   https://hellostay.com/api/booking/02edafa5f093ff99fef7836b0963d2b0/checkout?token=39|0RQIduOQh5ZHasnEEJgYH2dtP3Hp1MOSPt1GtBA244f38060
+  //        String neurl = ulr!+'?'+'token=${authToken}';
+  //        Navigator.push(context, MaterialPageRoute(builder: (context) =>  WebViewExample( url: neurl,)));
+  //
+  //      }
+  //
+  //    });
+  // }
+  //
+  //  Map<String, String> addMapListToData(
+  //      Map<String, String> data, List<Map<String, dynamic>> mapList) {
+  //    for (var map in mapList) {
+  //      map.forEach((key, value) {
+  //        data[key] = value;
+  //      });
+  //    }
+  //    return data;
+  //  }
 }

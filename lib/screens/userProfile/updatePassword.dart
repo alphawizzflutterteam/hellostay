@@ -194,7 +194,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     var headers = {
       'Authorization': 'Bearer $authToken'
     };
-    var request = http.MultipartRequest('POST', Uri.parse('https://hotelbooking.alphawizzserver.com/api/auth/update-password'));
+    var request = http.MultipartRequest('POST', Uri.parse('https://hellostay.com/api/auth/update-password'));
     request.fields.addAll({
       'new_password': updatePasswordController.text
     });

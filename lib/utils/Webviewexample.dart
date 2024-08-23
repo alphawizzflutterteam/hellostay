@@ -75,7 +75,7 @@ class _WebViewExampleState extends State<WebViewExample> {
 //           ''');
 //           },
           onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://hotelbooking.alphawizzserver.com/login?redirect=%2Fuser%2Fbooking-history')) {
+            if (request.url.startsWith('https://hellostay.com/login?redirect=%2Fuser%2Fbooking-history')) {
               debugPrint('blocking navigation to ${request.url}');
               Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomNavBar(),));
               return NavigationDecision.prevent;

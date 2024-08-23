@@ -19,19 +19,15 @@ class ApiException implements Exception {
 }
 
 class ApiBaseHelper {
-
-
-
   Future<dynamic> postAPICall(Uri url, Map param) async {
     var responseJson;
     log('${url}');
-    log('${param}');
-
+    log('aaaaaa${param}bbbbb');
 
     try {
       final response =
-      await post(url, body: param.isNotEmpty ? param : [], headers: headers)
-          .timeout(const Duration(seconds: timeOut));
+          await post(url, body: param.isNotEmpty ? param : [], headers: headers)
+              .timeout(const Duration(seconds: timeOut));
 
       responseJson = _response(response);
     } on SocketException catch (e) {
@@ -48,9 +44,10 @@ class ApiBaseHelper {
     var responseJson;
     log('${url}');
     try {
-      final response =
-      await get(url, headers: headers,)
-          .timeout(const Duration(seconds: timeOut));
+      final response = await get(
+        url,
+        headers: headers,
+      ).timeout(const Duration(seconds: timeOut));
 
       log('${response.statusCode}');
 
@@ -64,8 +61,6 @@ class ApiBaseHelper {
     }
     return responseJson;
   }
-
-
 
   dynamic _response(Response response) {
     switch (response.statusCode) {
@@ -113,6 +108,5 @@ class UnauthorisedException extends CustomException {
 class InvalidInputException extends CustomException {
   InvalidInputException([message]) : super(message, 'Invalid Input: ');
 }
-Map<String, String> get headers => {
-  'Authorization': 'Bearer $authToken'
-};
+
+Map<String, String> get headers => {'Authorization': 'Bearer $authToken'};

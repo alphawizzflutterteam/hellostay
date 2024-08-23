@@ -14,7 +14,6 @@ import 'package:http/http.dart' as http;
 import '../../model/getProfineModel.dart';
 import '../../widgets/loadingwidget.dart';
 
-
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
 
@@ -25,7 +24,6 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   var userimagedata;
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +49,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: "rubic",
-                               // fontWeight: FontWeight.bold,
+                                // fontWeight: FontWeight.bold,
                                 color: AppColors.white))),
                   ),
                 )
@@ -67,13 +65,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         elevation: 0,
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.whiteTemp,
-
-        title:  Text('Edit Profile',
-
+        title: Text(
+          'Edit Profile',
           style: TextStyle(
-              fontFamily: "rubic",
-              fontSize: 20.0,
-              color: AppColors.white),
+              fontFamily: "rubic", fontSize: 20.0, color: AppColors.white),
         ),
       ),
       body: isLoading
@@ -111,8 +106,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                               )
                             : CircleAvatar(
-                                backgroundImage:
-                                    NetworkImage("$userimagedata"),
+                                backgroundImage: NetworkImage("$userimagedata"),
                                 radius: 50,
                                 child: const Icon(
                                   Icons.camera_alt_outlined,
@@ -155,12 +149,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please Enter Business Name';
-                        }
-                        return null; // Return null if the input is valid
-                      },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please Enter Business Name';
+                      //   }
+                      //   return null; // Return null if the input is valid
+                      // },
                     ),
                     const SizedBox(
                       height: 5,
@@ -195,12 +189,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please Enter User Name';
-                        }
-                        return null; // Return null if the input is valid
-                      },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please Enter User Name';
+                      //   }
+                      //   return null; // Return null if the input is valid
+                      // },
                     ),
 
                     const SizedBox(
@@ -402,12 +396,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please Enter Date Of Birth';
-                        }
-                        return null; // Return null if the input is valid
-                      },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please Enter Date Of Birth';
+                      //   }
+                      //   return null; // Return null if the input is valid
+                      // },
                     ),
                     // const SizedBox(
                     //   height: 5,
@@ -473,12 +467,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please Enter Address Line 1';
-                        }
-                        return null; // Return null if the input is valid
-                      },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please Enter Address Line 1';
+                      //   }
+                      //   return null; // Return null if the input is valid
+                      // },
                     ),
                     const SizedBox(
                       height: 5,
@@ -512,12 +506,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please Enter Address Line 2';
-                        }
-                        return null; // Return null if the input is valid
-                      },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please Enter Address Line 2';
+                      //   }
+                      //   return null; // Return null if the input is valid
+                      // },
                     ),
                     const SizedBox(
                       height: 5,
@@ -551,12 +545,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please Enter City';
-                        }
-                        return null; // Return null if the input is valid
-                      },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please Enter City';
+                      //   }
+                      //   return null; // Return null if the input is valid
+                      // },
                     ),
                     const SizedBox(
                       height: 5,
@@ -589,12 +583,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please Enter State';
-                        }
-                        return null; // Return null if the input is valid
-                      },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please Enter State';
+                      //   }
+                      //   return null; // Return null if the input is valid
+                      // },
                     ),
                     const SizedBox(
                       height: 5,
@@ -665,12 +659,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please Enter Zip Code';
-                        }
-                        return null; // Return null if the input is valid
-                      },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Please Enter Zip Code';
+                      //   }
+                      //   return null; // Return null if the input is valid
+                      // },
                     ),
                     const SizedBox(
                       height: 5,
@@ -701,7 +695,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     });
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    token =  prefs.getString('userToken');
+    token = prefs.getString('userToken');
     debugPrint("===my technic=======$token===============");
     setState(() {});
     if (token == null) {
@@ -737,7 +731,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           isLoading = false;
           debugPrint(
               "===my technic=======${getUserDataResponse?.data.userName}===============");
-          bussinessnamecontroller.text = getUserDataResponse?.data.businessName ?? "";
+          bussinessnamecontroller.text =
+              getUserDataResponse?.data.businessName ?? "";
           usernamecontroller.text = getUserDataResponse?.data.userName ?? "";
           emailC.text = getUserDataResponse?.data.email ?? "";
           firstNmaeController.text = getUserDataResponse?.data.firstName ?? "";
@@ -805,7 +800,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     dateofbirthcontroller.text = DateFormat('dd-MM-yyyy').format(selectedDate);
 
     setState(() {});
-    debugPrint("===my technic=======${dateofbirthcontroller.text}===============");
+    debugPrint(
+        "===my technic=======${dateofbirthcontroller.text}===============");
   }
 
   File? userImg;
@@ -882,7 +878,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           height: 50,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8)),
-                          child: const Center(child: Text('Select From Gallery')),
+                          child:
+                              const Center(child: Text('Select From Gallery')),
                         ),
                       ),
                     ),
@@ -901,7 +898,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           height: 50,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8)),
-                          child: const Center(child: Text('Select From Camera')),
+                          child:
+                              const Center(child: Text('Select From Camera')),
                         ),
                       ),
                     )
@@ -991,6 +989,4 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       }
     }
   }
-
-
 }

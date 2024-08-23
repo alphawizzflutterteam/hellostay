@@ -10,7 +10,6 @@ import 'package:hellostay/constants/colors.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 import 'package:http/http.dart' as http;
 
 // import '../../Utils/Color.dart';
@@ -21,21 +20,20 @@ import 'package:http/http.dart' as http;
 
 class ReferAndEranScreen extends StatefulWidget {
   String? referCode;
-   ReferAndEranScreen({Key? key,this.referCode}) : super(key: key);
+  ReferAndEranScreen({Key? key, this.referCode}) : super(key: key);
 
   @override
   State<ReferAndEranScreen> createState() => _ReferAndEranScreenState();
 }
 
 class _ReferAndEranScreenState extends State<ReferAndEranScreen> {
-
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     // getProfile();
   }
+
   //GetProfileModel? getProfileModel;
   String qrCodeResult = "Not Yet Scanned";
 
@@ -74,21 +72,18 @@ class _ReferAndEranScreenState extends State<ReferAndEranScreen> {
         centerTitle: true,
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.whiteTemp,
-
-        title:  Text('Refer and Earn',
-
+        title: Text(
+          'Refer and Earn',
           style: TextStyle(
-              fontFamily: "rubic",
-              fontSize: 20.0,
-              color: AppColors.white),
+              fontFamily: "rubic", fontSize: 20.0, color: AppColors.white),
         ),
       ),
-      body:  Container(
+      body: Container(
         decoration: const BoxDecoration(
             color: AppColors.whiteTemp,
-            borderRadius: BorderRadius.only(topRight: Radius.circular(50),topLeft: Radius.circular(50))
-        ),
-        child:  Center(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(50), topLeft: Radius.circular(50))),
+        child: Center(
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -103,7 +98,7 @@ class _ReferAndEranScreenState extends State<ReferAndEranScreen> {
 
                       //   getTranslated(context, "Refer and Earn"),
                       // "Refer and earn",
-                      style:TextStyle(
+                      style: TextStyle(
                           fontFamily: "rubic",
                           fontSize: 16.0,
                           color: AppColors.blackTemp),
@@ -112,12 +107,11 @@ class _ReferAndEranScreenState extends State<ReferAndEranScreen> {
                   const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-
                       // getTranslated(context, "Invite your friends to join and get the reward as soon as your friend first order placed"),
-                      "Invite your friends to join and get the reward as soon as your friend first order placed",
+                      "Invite your friends to book with us, and earn rewards as soon as they complete their first booking!",
                       textAlign: TextAlign.center,
-                      style:TextStyle(
-                         // fontFamily: "rubic",
+                      style: TextStyle(
+                          // fontFamily: "rubic",
                           fontSize: 16.0,
                           color: Colors.black54),
                     ),
@@ -127,8 +121,8 @@ class _ReferAndEranScreenState extends State<ReferAndEranScreen> {
                     child: Text(
                       //getTranslated(context, "Your Referral Code"),
                       "Your Referral Code",
-                      style:TextStyle(
-                         fontFamily: "rubic",
+                      style: TextStyle(
+                          fontFamily: "rubic",
                           fontSize: 16.0,
                           color: Colors.black54),
                     ),
@@ -137,7 +131,7 @@ class _ReferAndEranScreenState extends State<ReferAndEranScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       width: 100,
-                      decoration:  BoxDecoration(
+                      decoration: BoxDecoration(
                         border: Border.all(
                           width: 1,
                           style: BorderStyle.solid,
@@ -145,7 +139,7 @@ class _ReferAndEranScreenState extends State<ReferAndEranScreen> {
                         ),
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      child:   Padding(
+                      child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           widget.referCode ?? "",
@@ -158,25 +152,28 @@ class _ReferAndEranScreenState extends State<ReferAndEranScreen> {
                   CupertinoButton(
                     padding: EdgeInsets.zero,
                     child: Container(
-                      padding:  EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                      decoration:  BoxDecoration(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                      decoration: BoxDecoration(
                           color: AppColors.primary,
-                          borderRadius:  BorderRadius.all(Radius.circular(4.0))),
-                      child:  Text(
+                          borderRadius: BorderRadius.all(Radius.circular(4.0))),
+                      child: Text(
                         // getTranslated(context, "Tap to copy"),
                         "Tap to copy",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: AppColors.whiteTemp),
-                      ),),
+                      ),
+                    ),
                     onPressed: () {
-                      Clipboard.setData( ClipboardData(text: widget.referCode ?? "" ));
+                      Clipboard.setData(
+                          ClipboardData(text: widget.referCode ?? ""));
                       // Clipboard.setData(ClipboardData(text: "${getProfileModel?.data?.first.referralCode}"));
                       // setSnackbar('Refercode Copied to clipboard');
-                      Fluttertoast.showToast(msg:
-                      // getTranslated(context, "Refer code Copied to clipboard"),
-                      "Refer code Copied to clipboard",
-                          backgroundColor: AppColors.primary
-                      );
+                      Fluttertoast.showToast(
+                          msg:
+                              // getTranslated(context, "Refer code Copied to clipboard"),
+                              "Refer code Copied to clipboard",
+                          backgroundColor: AppColors.primary);
                     },
                   ),
                   const SizedBox(height: 10),
@@ -192,16 +189,17 @@ class _ReferAndEranScreenState extends State<ReferAndEranScreen> {
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color:AppColors.primary
-                      ),
-                      child:  const Text(
+                          color: AppColors.primary),
+                      child: const Text(
                         // getTranslated(context, "Share"),
                         "Share",
                         style: TextStyle(
                           color: AppColors.whiteTemp,
-                        // fontWeight: FontWeight.bold,
+                          // fontWeight: FontWeight.bold,
                           fontFamily: "rubic",
-                          fontSize: 16,),),
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
                   ),
                   // SimBtn(
@@ -407,17 +405,13 @@ class _ReferAndEranScreenState extends State<ReferAndEranScreen> {
     //  );
   }
 
-  GlobalKey keyList = GlobalKey() ;
+  GlobalKey keyList = GlobalKey();
   bool iconVisible = true;
-  Future<void> share({String? referCode})  async {
+  Future<void> share({String? referCode}) async {
     FlutterShare.share(
         title: 'Refer and Eran',
         text: widget.referCode ?? "",
         linkUrl: 'Refer and Eran',
-        chooserTitle: 'Example Chooser Title'
-    );
+        chooserTitle: 'Example Chooser Title');
   }
-
-
-
 }

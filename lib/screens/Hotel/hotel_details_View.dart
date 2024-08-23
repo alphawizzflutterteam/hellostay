@@ -159,24 +159,29 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
             children: <Widget>[
               SizedBox(
                 height: 190.0,
-                child: hotelDetailsResponse?.data.mapLng!=null? GoogleMap(
-                  mapType: MapType.normal,
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(double.parse( hotelDetailsResponse?.data.mapLat?? '' ),
-                        double.parse( hotelDetailsResponse?.data.mapLng?? '0.0')),
-                    zoom: 13.0,
-                  ),
-                  markers: _markers,
-                ): Center(
-                  child: Container(
-                      width: 50,
-                      height: 50,
-                      child: const CircularProgressIndicator(
-                        //strokeWidth: 2,
+                child: hotelDetailsResponse?.data.mapLng != null
+                    ? GoogleMap(
+                        mapType: MapType.normal,
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(
+                              double.parse(
+                                  hotelDetailsResponse?.data.mapLat ?? ''),
+                              double.parse(
+                                  hotelDetailsResponse?.data.mapLng ?? '0.0')),
+                          zoom: 13.0,
+                        ),
+                        markers: _markers,
+                      )
+                    : Center(
+                        child: Container(
+                            width: 50,
+                            height: 50,
+                            child: const CircularProgressIndicator(
+                              //strokeWidth: 2,
 
-                        color: AppColors.primary,
-                      )),
-                ),
+                              color: AppColors.primary,
+                            )),
+                      ),
               ),
               // Padding(
               //   padding: const EdgeInsets.only(top: 135.0, right: 60.0),
@@ -212,23 +217,19 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
         bottomNavigationBar: InkWell(
           onTap: () {
             print('--------price -------${hotelDetailsResponse?.data?.price}');
-         if(hotelDetailsResponse!.data.rooms!.length < 1)
-           {
-             Fluttertoast.showToast(msg: "No Rooms Available");
-           }
-         else
-           {
-             Navigator.push(
-                 context,
-                 MaterialPageRoute(
-                     builder: (context) => HotelRooms(
-                       rooms: hotelDetailsResponse?.data.rooms,
-                       idD: widget.idD,
-                       photoD: photoD,
-                       price: hotelDetailsResponse?.data?.price,
-
-                     )));
-           }
+            if (hotelDetailsResponse!.data.rooms!.length < 1) {
+              Fluttertoast.showToast(msg: "No Rooms Available");
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => HotelRooms(
+                            rooms: hotelDetailsResponse?.data.rooms,
+                            idD: widget.idD,
+                            photoD: photoD,
+                            price: hotelDetailsResponse?.data?.price,
+                          )));
+            }
 
             // Scrollable.ensureVisible(key1.currentContext!);
 
@@ -239,7 +240,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
             child: CustomButton(textt: 'Select Room'),
           ),
         ),
-        body:  SafeArea(
+        body: SafeArea(
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
@@ -289,7 +290,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                                     "Hotel",
                             style: const TextStyle(
                               fontFamily: "rubic",
-                             // fontFamily: "open-sans",
+                              // fontFamily: "open-sans",
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               //color: Colors.black,
@@ -320,8 +321,8 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                               hotelDetailsResponse?.data.address ?? "",
                               //overflow: TextOverflow.clip,
                               //maxLines: 1,
-                              style:  TextStyle(
-                               // fontFamily: "open-sans",
+                              style: TextStyle(
+                                // fontFamily: "open-sans",
                                 fontSize: 12.0,
                                 fontFamily: "rubic",
                                 fontWeight: FontWeight.w400,
@@ -361,21 +362,26 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                           //         (_) {}, // Provide an empty function to disable editing
                           //   ),
                           // ),
-                           IgnorePointer(
+                          IgnorePointer(
                             ignoring: true,
                             child: RatingBar.builder(
-                              initialRating:double.parse(hotelDetailsResponse?.data!.reviewScore?.scoreTotal.toString() ?? "0.0"),
+                              initialRating: double.parse(hotelDetailsResponse
+                                      ?.data!.reviewScore?.scoreTotal
+                                      .toString() ??
+                                  "0.0"),
 
                               minRating: 1,
                               direction: Axis.horizontal,
-                              allowHalfRating: true, // Set to true to allow half ratings
+                              allowHalfRating:
+                                  true, // Set to true to allow half ratings
                               itemCount: 5,
                               itemSize: 12.0,
                               itemBuilder: (context, _) => Icon(
                                 Icons.star,
                                 color: Colors.amber,
                               ),
-                              onRatingUpdate: (_) {}, // Provide an empty function to disable editing
+                              onRatingUpdate:
+                                  (_) {}, // Provide an empty function to disable editing
                             ),
                           )
 
@@ -460,63 +466,59 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                           Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: List<Widget>.generate( !viewAll ? 0 :descriptionD?.length ?? 0, (index) {
+                              children: List<Widget>.generate(
+                                  !viewAll ? 0 : descriptionD?.length ?? 0,
+                                  (index) {
                                 var item = descriptionD?[index];
                                 return Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 10.0, left: 10.0, bottom: 10.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  1.3,
-                                              child: StyledText(
-                                                text: item!.replaceAll("</p>", "\n"),
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontFamily: "rubic",
-                                                  color: Colors.black54,
-                                                ),
-                                                tags: {
-                                                  'h4': StyledTextTag(
-                                                      style: const TextStyle(
-                                                          fontFamily: "rubic",
-                                                          fontSize: 16,
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.w700
-                                                      )),
-                                                  'li': StyledTextTag(
-                                                      style: const TextStyle(
-                                                        fontFamily: "rubic",
-                                                        fontSize: 16,
-                                                        color: Colors.black54,
-                                                  //  fontStyle: FontStyle.italic,
-                                                  )
-
-                                                  ),
-                                                },
-                                              ),
-                                            ),
-                                          ],
+                                  padding: const EdgeInsets.only(
+                                      top: 10.0, left: 10.0, bottom: 10.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.3,
+                                        child: StyledText(
+                                          text: item!.replaceAll("</p>", "\n"),
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: "rubic",
+                                            color: Colors.black54,
+                                          ),
+                                          tags: {
+                                            'h4': StyledTextTag(
+                                                style: const TextStyle(
+                                                    fontFamily: "rubic",
+                                                    fontSize: 16,
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.w700)),
+                                            'li': StyledTextTag(
+                                                style: const TextStyle(
+                                              fontFamily: "rubic",
+                                              fontSize: 16,
+                                              color: Colors.black54,
+                                              //  fontStyle: FontStyle.italic,
+                                            )),
+                                          },
                                         ),
-                                      );
-                              })
-                                  .toList()),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }).toList()),
                           InkWell(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Text(
                                   !viewAll ? "...show more" : "...show less",
-                                  style:
-                                  const TextStyle(color: Colors.blue, fontFamily: 'rubic'),
+                                  style: const TextStyle(
+                                      color: Colors.blue, fontFamily: 'rubic'),
                                 ),
                               ],
                             ),
@@ -529,117 +531,121 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
                         ],
                       ),
                     ),
-                        const Padding(
-                          padding: EdgeInsets.only(
-                              top: 10.0, left: 20.0, right: 20.0, bottom: 10.0),
-                          child: Text(
-                            'Amenities',
-                            style: TextStyle(
-                                fontFamily: "rubic",
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w700),
-                            textAlign: TextAlign.justify,
-                          ),
-                        ),
-                        ///Amenities
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 0.0, left: 20.0, right: 20.0, bottom: 0.0),
-                          child: Column(
-                            children: [
-                              Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: List<Widget>.generate(!showAll ? 1 : hotelDetailsResponse?.data.terms?.length ?? 0 , (index) {
-                                    var item = hotelDetailsResponse?.data.terms?[index];
+                    const Padding(
+                      padding: EdgeInsets.only(
+                          top: 10.0, left: 20.0, right: 20.0, bottom: 10.0),
+                      child: Text(
+                        'Amenities',
+                        style: TextStyle(
+                            fontFamily: "rubic",
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
 
-                                    return Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10.0, left: 10.0, bottom: 0.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          item?.title ?? '',
-                                          style: const TextStyle(
-                                              fontFamily: "rubic",
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.w700),
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                        Wrap(
-                                          children: List<Widget>.generate(
-                                            !showAll ? 4 : item?.child.length ?? 0,
-                                                (index) {
-                                              return Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                                children: [
-                                                  const Text(
-                                                    "-   ",
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 18.0,
-                                                    ),
+                    ///Amenities
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 0.0, left: 20.0, right: 20.0, bottom: 0.0),
+                      child: Column(
+                        children: [
+                          Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: List<Widget>.generate(
+                                  !showAll
+                                      ? 1
+                                      : hotelDetailsResponse
+                                              ?.data.terms?.length ??
+                                          0, (index) {
+                                var item =
+                                    hotelDetailsResponse?.data.terms?[index];
+
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10.0, left: 10.0, bottom: 0.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item?.title ?? '',
+                                        style: const TextStyle(
+                                            fontFamily: "rubic",
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w700),
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                      Wrap(
+                                        children: List<Widget>.generate(
+                                          !showAll
+                                              ? 4
+                                              : item?.child.length ?? 0,
+                                          (index) {
+                                            return Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Text(
+                                                  "-   ",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 18.0,
                                                   ),
-                                                  SizedBox(
-                                                    width:
-                                                    MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                        1.3,
-                                                    child: Text(
-                                                      item?.child[index].title ?? '',
-                                                      style: const TextStyle(
-                                                        fontFamily: "rubic",
-                                                        color: Colors.black54,
-                                                        fontSize: 16.0,
-                                                      ),
-                                                      overflow:
-                                                      TextOverflow.clip,
+                                                ),
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      1.3,
+                                                  child: Text(
+                                                    item?.child[index].title ??
+                                                        '',
+                                                    style: const TextStyle(
+                                                      fontFamily: "rubic",
+                                                      color: Colors.black54,
+                                                      fontSize: 16.0,
                                                     ),
+                                                    overflow: TextOverflow.clip,
                                                   ),
-                                                ],
-                                              );
-                                            },
-                                          ),
+                                                ),
+                                              ],
+                                            );
+                                          },
                                         ),
-                                      ],
-                                    ),
-                                                                  );
-                                  })
-                                      .toList()),
-                              InkWell(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(
-                                      !showAll ? "...show more" : "...show less",
-                                      style:
-                                      const TextStyle(color: Colors.blue, fontFamily: 'rubic'),
-                                    ),
-                                  ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }).toList()),
+                          InkWell(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  !showAll ? "...show more" : "...show less",
+                                  style: const TextStyle(
+                                      color: Colors.blue, fontFamily: 'rubic'),
                                 ),
-                                onTap: () {
-                                  setState(() {
-                                    showAll = !showAll;
-                                  });
-                                },
-                              )
-                            ],
-                          ),
-                        ),
+                              ],
+                            ),
+                            onTap: () {
+                              setState(() {
+                                showAll = !showAll;
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+
                     /// Location
                     _location,
 
-
-
                     /// service
-
-
 
                     //
                     // const Padding(
@@ -1245,8 +1251,6 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
 
     for (int i = 0; i < adultCountList.length; i++) {
       Map<String, String> guestData = {
-
-
         'tot_adults[$i]': adultCountList[i].toString(),
         'tot_children[$i]': childrenCountList[i].toString(),
         'children_age[$i]': childrenCountListOfList[i].toString()
@@ -1265,9 +1269,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
       log('${getData}');
 
       String status = getData['status'].toString();
-     // String msg= getData['message'].toString();
-
-
+      // String msg= getData['message'].toString();
 
       if (status == '1') {
         hotelDetailsResponse = HotelDetailsResponse.fromJson(getData);
@@ -1278,8 +1280,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
         print(hotelDetailsResponse?.data?.price);
         print(hotelDetailsResponse?.data.gallery);
 
-
-        hotelDetailsResponse?.data.gallery!.forEach((element) {
+        hotelDetailsResponse?.data.gallery?.forEach((element) {
           photoD?.add(element ?? '');
         });
         descriptionD?.add(hotelDetailsResponse?.data.content ?? '');
@@ -1347,7 +1348,7 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
         ulr = value['url'];
         print("kkkkkkkk");
         print(ulr);
-        //   https://hotelbooking.alphawizzserver.com/api/booking/02edafa5f093ff99fef7836b0963d2b0/checkout?token=39|0RQIduOQh5ZHasnEEJgYH2dtP3Hp1MOSPt1GtBA244f38060
+        //   https://hellostay.com/api/booking/02edafa5f093ff99fef7836b0963d2b0/checkout?token=39|0RQIduOQh5ZHasnEEJgYH2dtP3Hp1MOSPt1GtBA244f38060
         String neurl = ulr! + '?' + 'token=${authToken}';
         Navigator.push(
             context,

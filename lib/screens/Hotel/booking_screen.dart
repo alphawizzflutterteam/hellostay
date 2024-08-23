@@ -419,7 +419,7 @@ class _BookingScreenState extends State<BookingScreen>
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(backgroundColor: AppColors.secondary),
                         onPressed: () async{
-                     String url ='https://hotelbooking.alphawizzserver.com/api/user/${hotelList[i].code}/invoice?token=$authToken';
+                     String url ='https://hellostay.com/api/user/${hotelList[i].code}/invoice?token=$authToken';
                      if (await canLaunch(url)) {
                       await launch(url);
                       } else {

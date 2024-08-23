@@ -15,15 +15,17 @@ import '../../utils/traver_tile.dart';
 import '../../widgets/room_widget.dart';
 import 'BookNowDetails.dart';
 import 'homeView.dart';
+
 class HotelRooms extends StatefulWidget {
   String? price;
- // final String  rooms;
+  // final String  rooms;
   List<String>? photoD = [];
 
   List<Room>? rooms;
   final String? idD;
 
-  HotelRooms({Key? key,  this.rooms, this.idD,this.photoD,this.price}) : super(key: key);
+  HotelRooms({Key? key, this.rooms, this.idD, this.photoD, this.price})
+      : super(key: key);
 
   @override
   State<HotelRooms> createState() => _HotelRoomsState();
@@ -34,91 +36,84 @@ class _HotelRoomsState extends State<HotelRooms> {
   String? reviewPrice;
   List<dynamic> list = [];
 
-
-
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-     // rooms = widget.rooms1;
-     
-
-
+    // rooms = widget.rooms1;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-      backgroundColor: AppColors.white,
-      centerTitle: true,
-      elevation: 0.0,
-      title: const Padding(
-        padding: EdgeInsets.only(top: 20.0, left: 5.0),
-        child: Text(
-          'Room Details',
-          style: TextStyle(
-              fontFamily: "rubic",
-              fontSize: 20.0,
-              color: AppColors.blackTemp),
+          backgroundColor: AppColors.white,
+          centerTitle: true,
+          elevation: 0.0,
+          title: const Padding(
+            padding: EdgeInsets.only(top: 20.0, left: 5.0),
+            child: Text(
+              'Room Details',
+              style: TextStyle(
+                  fontFamily: "rubic",
+                  fontSize: 20.0,
+                  color: AppColors.blackTemp),
+            ),
+          ),
         ),
-      ),
-
-    ),
-      body:  roomsWidget()
-    );
+        body: roomsWidget());
   }
 
   var key1 = GlobalKey();
   Widget roomsWidget() {
     return SingleChildScrollView(
       key: key1,
-    //  scrollDirection: Axis.horizontal,
+      //  scrollDirection: Axis.horizontal,
       child: Column(
-        children: List.generate(widget.rooms?.length ?? 0,
-                (index) {
-              var item = widget.rooms![index];
-              print("bbbb${widget.rooms![index].doubleOccupancyPrice}");
+        children: List.generate(widget.rooms?.length ?? 0, (index) {
+          var item = widget.rooms![index];
+          print("bbbb${widget.rooms![index].doubleOccupancyPrice}");
 
-              return FeatureItem(
-                data: item,
-                onTapFavorite: () {
-                  item?.isFavorite = !(item.isFavorite ?? false);
-                  setState(() {});
-                },
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            RoomReview(room: item, idD: widget.idD ,photoD: widget.photoD),
-                      ));
-                },
-                onTapBook: () {
-                  addToCartRoom(item?.id.toString() ?? '',item.image ??"" ,item.title ?? "",widget.rooms![index]);
+          return FeatureItem(
+            data: item,
+            onTapFavorite: () {
+              item?.isFavorite = !(item.isFavorite ?? false);
+              setState(() {});
+            },
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RoomReview(
+                        room: item, idD: widget.idD, photoD: widget.photoD),
+                  ));
+            },
+            onTapBook: () {
+              addToCartRoom(item?.id.toString() ?? '', item.image ?? "",
+                  item.title ?? "", widget.rooms![index]);
               print("price---");
-                  print(widget.rooms![index].totPriceText ?? "");
-                },
-              );
-            }),
+              print(widget.rooms![index].totPriceText ?? "");
+            },
+          );
+        }),
       ),
     );
   }
 
   String? ulr;
-  Future<void> addToCartRoom(String roomId,String img ,String title,Room rooms) async {
+  Future<void> addToCartRoom(
+      String roomId, String img, String title, Room rooms) async {
     print("gopl-------------");
     var param = {
       'service_type': 'hotel',
       'service_id': '${widget.idD}',
       'rooms': '[{"id":"${roomId}","number_selected":"${room}"}]',
       'start_date':
-      DateFormat('yyyy-MM-dd').format(DateTime.parse(checkInDate)),
+          DateFormat('yyyy-MM-dd').format(DateTime.parse(checkInDate)),
       'end_date': DateFormat('yyyy-MM-dd').format(DateTime.parse(checkOutDate)),
       'adults': '${adultCount1}',
       'children': '${childrenCount1}',
-      'room_amount':rooms.totalPriceInString ?? "0"
+      'room_amount': rooms.totalPriceInString ?? "0"
     };
     List<Map<String, String>> guestsList = [];
     for (int i = 0; i < adultCountList.length; i++) {
@@ -136,7 +131,7 @@ class _HotelRoomsState extends State<HotelRooms> {
       log('${value}');
 
       var status = value['status'];
-      var msg=value['message'];
+      var msg = value['message'];
 
       var bookingCode = value['booking_code'];
       print(bookingCode);
@@ -144,18 +139,25 @@ class _HotelRoomsState extends State<HotelRooms> {
 
       if (status.toString() == '1') {
         ulr = value['url'];
-        //   https://hotelbooking.alphawizzserver.com/api/booking/02edafa5f093ff99fef7836b0963d2b0/checkout?token=39|0RQIduOQh5ZHasnEEJgYH2dtP3Hp1MOSPt1GtBA244f38060
+        //   https://hellostay.com/api/booking/02edafa5f093ff99fef7836b0963d2b0/checkout?token=39|0RQIduOQh5ZHasnEEJgYH2dtP3Hp1MOSPt1GtBA244f38060
         String neurl = ulr! + '?' + 'token=${authToken}';
 
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>BookNowDetails(imageUrl: img,title: title,bookingId: bookingCode,rooms: rooms,)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BookNowDetails(
+                      imageUrl: img,
+                      title: title,
+                      bookingId: bookingCode,
+                      rooms: rooms,
+                    )));
         // Navigator.push(
         //     context,
         //     MaterialPageRoute(
         //         builder: (context) => WebViewExample(
         //           url: neurl,
         //         )));
-      }
-      else
+      } else
         Fluttertoast.showToast(msg: msg);
     });
   }

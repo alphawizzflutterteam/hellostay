@@ -2,174 +2,44 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hellostay/constants/colors.dart';
 
-Widget customAuthDegine (BuildContext context, String imagePath,){
-  return
-
-    Stack(children: [
-    Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(20),
-            bottomRight: Radius.circular(20)),
-        gradient: LinearGradient(
-          colors: [AppColors.primary, AppColors.whiteTemp],
-          // Define the colors
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: Column(
-        children: [
-          Padding(
-            padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height/12),
-            child:
-
-                Container(
-                    height: 150,
-                    width: 150,
-                    child: Image.asset("${imagePath.toString()}", scale: 1)),
-
-
-          ),
-        ],
-      ),
-    ),
-    Container(
-      // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height/2.84,),
-
-      child: Container(
-        width: MediaQuery.of(context).size.width,
+Widget customAuthDegine(
+  BuildContext context,
+  String imagePath,
+) {
+  return Stack(
+    children: [
+      Container(
         height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
-          color: AppColors.secondary,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            // Top-left corner radius
-            topRight: Radius.circular(30),
-            // Bottom-right corner with no rounding
-          ),
-        ),
-      ),
-    ),
-  ],);
-}
-Widget customAuthDegineforForget (BuildContext context,){
-  return
-
-    Stack(children: [
-      Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(20)),
           gradient: LinearGradient(
-            colors: [AppColors.primary, AppColors.secondary],
+            colors: [AppColors.primary, AppColors.whiteTemp],
             // Define the colors
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(right: 20,left: 20,top: 20),
-          child: Column(
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height/19,),
-             Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               children: [
-               
-               
-               InkWell(
-                   onTap: () {
-
-                     Navigator.pop(context);
-                   },
-                   child: Icon(Icons.arrow_back_ios,color: AppColors.whiteTemp,size: 20,)),
-               
-               Text("Forgot Password",style: TextStyle(fontSize: 20,color: AppColors.whiteTemp,fontWeight: FontWeight.w500),),
-               SizedBox()
-             ],),
-              SizedBox(height: 15,),
-              Text("Enter the mobile number associated with your account and we'll send you instructions on how to reset your password.",style: TextStyle(fontSize: 12,color: AppColors.whiteTemp),)
-            ],
-          ),
-        ),
-      ),
-      Container(
-        // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
-        padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height/3.55,),
-
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-            color:  AppColors.secondary,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              // Top-left corner radius
-              topRight: Radius.circular(30),
-              // Bottom-right corner with no rounding
+        child: Column(
+          children: [
+            Padding(
+              padding:
+                  EdgeInsets.only(top: MediaQuery.of(context).size.height / 12),
+              child: Container(
+                  height: 150,
+                  width: 150,
+                  child: Image.asset("${imagePath.toString()}", scale: 1)),
             ),
-          ),
-        ),
-      ),
-    ],);
-}
-Widget customAuthDegineforUpdatePassword (BuildContext context, String mobile){
-  return
-
-    Stack(children: [
-      Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20)),
-          gradient: LinearGradient(
-            colors: [AppColors.primary, AppColors.secondary],
-            // Define the colors
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(right: 20,left: 20,top: 20),
-          child: Column(
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height/19,),
-             Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               children: [
-
-
-               InkWell(
-                   onTap: () {
-
-                     Navigator.pop(context);
-                   },
-                   child: Icon(Icons.arrow_back_ios,color: AppColors.whiteTemp,size: 20,)),
-
-               Text("New Password",style: TextStyle(fontSize: 20,color: AppColors.whiteTemp,fontWeight: FontWeight.w500),),
-               SizedBox()
-             ],),
-               SizedBox(height: 25,),
-               Text("Enter a new password for: +91 ${ mobile}",style: TextStyle(fontSize: 13,color: AppColors.whiteTemp,fontWeight: FontWeight.bold),)
-            ],
-          ),
+          ],
         ),
       ),
       Container(
         // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height/3.55,),
+          top: MediaQuery.of(context).size.height / 2.84,
+        ),
 
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -185,13 +55,182 @@ Widget customAuthDegineforUpdatePassword (BuildContext context, String mobile){
           ),
         ),
       ),
-    ],);
+    ],
+  );
 }
 
-Widget customAuthDegineforverifie (BuildContext context,){
-  return
+Widget customAuthDegineforForget(
+  BuildContext context,
+) {
+  return Stack(
+    children: [
+      Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20)),
+          gradient: LinearGradient(
+            colors: [AppColors.primary, AppColors.secondary],
+            // Define the colors
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 19,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.whiteTemp,
+                        size: 20,
+                      )),
+                  Text(
+                    "Forgot Password",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: AppColors.whiteTemp,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox()
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                "Enter the mobile number associated with your account, and we’ll send you an OTP to verify your identity and reset your password.",
+                style: TextStyle(fontSize: 12, color: AppColors.whiteTemp),
+              )
+            ],
+          ),
+        ),
+      ),
+      Container(
+        // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height / 3.55,
+        ),
 
-    Stack(children: [
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+            color: AppColors.secondary,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              // Top-left corner radius
+              topRight: Radius.circular(30),
+              // Bottom-right corner with no rounding
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget customAuthDegineforUpdatePassword(BuildContext context, String mobile) {
+  return Stack(
+    children: [
+      Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20)),
+          gradient: LinearGradient(
+            colors: [AppColors.primary, AppColors.secondary],
+            // Define the colors
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 19,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.whiteTemp,
+                        size: 20,
+                      )),
+                  Text(
+                    "New Password",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: AppColors.whiteTemp,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox()
+                ],
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Text(
+                "Enter a new password for: +91 ${mobile}",
+                style: TextStyle(
+                    fontSize: 13,
+                    color: AppColors.whiteTemp,
+                    fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+        ),
+      ),
+      Container(
+        // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height / 3.55,
+        ),
+
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+            color: AppColors.secondary,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              // Top-left corner radius
+              topRight: Radius.circular(30),
+              // Bottom-right corner with no rounding
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget customAuthDegineforverifie(
+  BuildContext context,
+) {
+  return Stack(
+    children: [
       Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -207,27 +246,41 @@ Widget customAuthDegineforverifie (BuildContext context,){
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(right: 20,left: 20,top: 20),
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
           child: Column(
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height/19,),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 19,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
-
                   InkWell(
                       onTap: () {
-
                         Navigator.pop(context);
                       },
-                      child: Icon(Icons.arrow_back_ios,color: AppColors.whiteTemp,size: 20,)),
-
-                  Text("Verification",style: TextStyle(fontSize: 20,color: AppColors.whiteTemp,fontWeight: FontWeight.w500),),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.whiteTemp,
+                        size: 20,
+                      )),
+                  Text(
+                    "Verification",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: AppColors.whiteTemp,
+                        fontWeight: FontWeight.w500),
+                  ),
                   SizedBox()
-                ],),
-              SizedBox(height: 15,),
-              Text("A verification code has been sent to your mobile number via SMS. Please enter the code below to complete your verification.",style: TextStyle(fontSize: 12,color: AppColors.whiteTemp),)
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                "A verification code has been sent to your mobile number via SMS. Please enter the code below to complete your verification.",
+                style: TextStyle(fontSize: 12, color: AppColors.whiteTemp),
+              )
             ],
           ),
         ),
@@ -235,7 +288,8 @@ Widget customAuthDegineforverifie (BuildContext context,){
       Container(
         // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height/3.45,),
+          top: MediaQuery.of(context).size.height / 3.45,
+        ),
 
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -251,12 +305,15 @@ Widget customAuthDegineforverifie (BuildContext context,){
           ),
         ),
       ),
-    ],);
+    ],
+  );
 }
-Widget customchangepassword (BuildContext context,){
-  return
 
-    Stack(children: [
+Widget customchangepassword(
+  BuildContext context,
+) {
+  return Stack(
+    children: [
       Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -272,27 +329,41 @@ Widget customchangepassword (BuildContext context,){
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(right: 20,left: 20,top: 20),
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
           child: Column(
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height/19,),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 19,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
-
                   InkWell(
                       onTap: () {
-
                         Navigator.pop(context);
                       },
-                      child: Icon(Icons.arrow_back_ios,color: AppColors.whiteTemp,size: 20,)),
-
-                  Text("Create Password",style: TextStyle(fontSize: 20,color: AppColors.whiteTemp,fontWeight: FontWeight.w500),),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.whiteTemp,
+                        size: 20,
+                      )),
+                  Text(
+                    "Create Password",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: AppColors.whiteTemp,
+                        fontWeight: FontWeight.w500),
+                  ),
                   SizedBox()
-                ],),
-              SizedBox(height: 15,),
-              Text("There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",style: TextStyle(fontSize: 12,color: AppColors.whiteTemp),)
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
+                style: TextStyle(fontSize: 12, color: AppColors.whiteTemp),
+              )
             ],
           ),
         ),
@@ -300,7 +371,8 @@ Widget customchangepassword (BuildContext context,){
       Container(
         // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height/3.6,),
+          top: MediaQuery.of(context).size.height / 3.6,
+        ),
 
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -316,51 +388,61 @@ Widget customchangepassword (BuildContext context,){
           ),
         ),
       ),
-    ],);
+    ],
+  );
 }
 
-
-Widget customAuthDegineforprofle (BuildContext context,){
-  return
-
-    Stack(children: [
+Widget customAuthDegineforprofle(
+  BuildContext context,
+) {
+  return Stack(
+    children: [
       Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20)),
-          color: AppColors.primary
-  ),
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20)),
+            color: AppColors.primary),
         child: Padding(
-          padding: const EdgeInsets.only(right: 20,left: 20,top: 20),
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
           child: Column(
             children: [
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
-
                   InkWell(
                       onTap: () {
-
                         Navigator.pop(context);
                       },
-                      child: Icon(Icons.arrow_back_ios,color: AppColors.whiteTemp,size: 20,)),
-
-                  const Text("My Profile",style: TextStyle(fontSize: 20,color: AppColors.whiteTemp,fontWeight: FontWeight.w500),),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.whiteTemp,
+                        size: 20,
+                      )),
+                  const Text(
+                    "My Profile",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: AppColors.whiteTemp,
+                        fontWeight: FontWeight.w500),
+                  ),
                   const SizedBox()
-                ],),
-              ],
+                ],
+              ),
+            ],
           ),
         ),
       ),
       Container(
         // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height/4.9,),
+          top: MediaQuery.of(context).size.height / 4.9,
+        ),
 
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -376,13 +458,13 @@ Widget customAuthDegineforprofle (BuildContext context,){
           ),
         ),
       ),
-    ],);
+    ],
+  );
 }
 
-Widget customdecorationFORScr (BuildContext context,String titlee){
-  return
-
-    Stack(children: [
+Widget customdecorationFORScr(BuildContext context, String titlee) {
+  return Stack(
+    children: [
       Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -398,90 +480,34 @@ Widget customdecorationFORScr (BuildContext context,String titlee){
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(right: 20,left: 20,top: 20),
-          child:
-
-          Column(
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
+          child: Column(
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height/55,),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 55,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
-
                   InkWell(
                       onTap: () {
-
                         Navigator.pop(context);
                       },
-                      child: Icon(Icons.arrow_back_ios,color: AppColors.whiteTemp,size: 20,)),
-
-                  Text("${titlee}",style: TextStyle(fontSize: 20,color: AppColors.whiteTemp,fontWeight: FontWeight.w500),),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.whiteTemp,
+                        size: 20,
+                      )),
+                  Text(
+                    "${titlee}",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: AppColors.whiteTemp,
+                        fontWeight: FontWeight.w500),
+                  ),
                   SizedBox()
-                ],),
-               ],
-          ),
-        ),
-      ),
-      Container(
-        // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
-        padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height/7.5,),
-
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              // Top-left corner radius
-              topRight: Radius.circular(30),
-              // Bottom-right corner with no rounding
-            ),
-          ),
-        ),
-      ),
-    ],);
-}
-
-
-
-Widget customdwithoutBackScr (BuildContext context,String titlee){
-  return
-
-    Stack(children: [
-      Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20)),
-          gradient: LinearGradient(
-            colors: [AppColors.primary, AppColors.secondary],
-            // Define the colors
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(right: 20,left: 20,top: 20),
-          child:
-
-          Column(
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height/55,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-
-
-                 SizedBox(),
-
-                  Text("${titlee}",style: TextStyle(fontSize: 20,color: AppColors.whiteTemp,fontWeight: FontWeight.w500),),
-                  SizedBox()
-                ],),
+                ],
+              ),
             ],
           ),
         ),
@@ -489,7 +515,8 @@ Widget customdwithoutBackScr (BuildContext context,String titlee){
       Container(
         // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height/7.5,),
+          top: MediaQuery.of(context).size.height / 7.5,
+        ),
 
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -505,13 +532,13 @@ Widget customdwithoutBackScr (BuildContext context,String titlee){
           ),
         ),
       ),
-    ],);
+    ],
+  );
 }
 
-Widget customdecorationhomeScreen (BuildContext context,String titlee){
-  return
-
-    Stack(children: [
+Widget customdwithoutBackScr(BuildContext context, String titlee) {
+  return Stack(
+    children: [
       Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -527,29 +554,98 @@ Widget customdecorationhomeScreen (BuildContext context,String titlee){
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(right: 20,left: 20,top: 20),
-          child:
-
-          Column(
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
+          child: Column(
             children: [
-
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 55,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SizedBox(),
+                  Text(
+                    "${titlee}",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: AppColors.whiteTemp,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox()
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      Container(
+        // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height / 7.5,
+        ),
 
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              // Top-left corner radius
+              topRight: Radius.circular(30),
+              // Bottom-right corner with no rounding
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+}
 
-                  SizedBox(width: 20,),
-
-                  Text("${titlee}",style: TextStyle(fontSize: 20,color: AppColors.whiteTemp,fontWeight: FontWeight.w500),),
+Widget customdecorationhomeScreen(BuildContext context, String titlee) {
+  return Stack(
+    children: [
+      Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20)),
+          gradient: LinearGradient(
+            colors: [AppColors.primary, AppColors.secondary],
+            // Define the colors
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    "${titlee}",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: AppColors.whiteTemp,
+                        fontWeight: FontWeight.w500),
+                  ),
                   InkWell(
-
                       onTap: () {
-
-
-                       // Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationScr(),));
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationScr(),));
                       },
-                      child: Image.asset('assets/images/notification.png',scale: 1.5,))
-                ],),
+                      child: Image.asset(
+                        'assets/images/notification.png',
+                        scale: 1.5,
+                      ))
+                ],
+              ),
             ],
           ),
         ),
@@ -557,7 +653,8 @@ Widget customdecorationhomeScreen (BuildContext context,String titlee){
       Container(
         // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height/9,),
+          top: MediaQuery.of(context).size.height / 9,
+        ),
 
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -573,13 +670,13 @@ Widget customdecorationhomeScreen (BuildContext context,String titlee){
           ),
         ),
       ),
-    ],);
+    ],
+  );
 }
 
-Widget orderdetailsCustom (BuildContext context,String titlee){
-  return
-
-    Stack(children: [
+Widget orderdetailsCustom(BuildContext context, String titlee) {
+  return Stack(
+    children: [
       Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -595,34 +692,41 @@ Widget orderdetailsCustom (BuildContext context,String titlee){
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(right: 20,left: 20,top: 20),
-          child:
-
-          Column(
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
+          child: Column(
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height/55,),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 55,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
-
                   InkWell(
                       onTap: () {
-
                         Navigator.pop(context);
                       },
-                      child: Icon(Icons.arrow_back_ios,color: AppColors.whiteTemp,size: 20,)),
-
-                  Text("${titlee}",style: TextStyle(fontSize: 20,color: AppColors.whiteTemp,fontWeight: FontWeight.w500),),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.whiteTemp,
+                        size: 20,
+                      )),
+                  Text(
+                    "${titlee}",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: AppColors.whiteTemp,
+                        fontWeight: FontWeight.w500),
+                  ),
                   InkWell(
-
                       onTap: () {
-
-
-                       // Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationScr(),));
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationScr(),));
                       },
-                      child: Image.asset('assets/images/notification.png',scale: 1.5,))
-                ],),
+                      child: Image.asset(
+                        'assets/images/notification.png',
+                        scale: 1.5,
+                      ))
+                ],
+              ),
             ],
           ),
         ),
@@ -630,7 +734,8 @@ Widget orderdetailsCustom (BuildContext context,String titlee){
       Container(
         // padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height/3.18),
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height/7.5,),
+          top: MediaQuery.of(context).size.height / 7.5,
+        ),
 
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -646,6 +751,6 @@ Widget orderdetailsCustom (BuildContext context,String titlee){
           ),
         ),
       ),
-    ],);
+    ],
+  );
 }
-

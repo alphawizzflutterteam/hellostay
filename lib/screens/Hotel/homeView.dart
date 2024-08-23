@@ -55,7 +55,6 @@ final List rooms = [
   },
 ];
 
-
 List images = [];
 List city = [];
 DateTime startDate = DateTime.now();
@@ -99,19 +98,18 @@ class _HotelHomePageState extends State<HotelHomePage> {
     // TODO: implement initState
     //getCityList();
     super.initState();
+
     ///
 
-    _controller.text= "Suggestion(description: Bengaluru, Karnataka, India, placeId: ChIJbU60yXAWrjsR4E9-UejD3_g).description";
-     searchC.text="Bengaluru, Karnataka, India";
-      adultCountList = [];
-      childrenCountList = [];
-      adultCount1 = 2;
-      childrenCount1 = 0;
-      room = 1;
-      childrenCountListOfList = [];
-
-
-
+    _controller.text =
+        "Suggestion(description: Bengaluru, Karnataka, India, placeId: ChIJbU60yXAWrjsR4E9-UejD3_g).description";
+    searchC.text = "Bengaluru, Karnataka, India";
+    adultCountList = [];
+    childrenCountList = [];
+    adultCount1 = 2;
+    childrenCount1 = 0;
+    room = 1;
+    childrenCountListOfList = [];
 
     ///
     getFcmToken();
@@ -132,9 +130,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
   HomeBannerModel? homeBannerModel;
   getBannerApi() async {
     var request = http.Request(
-        'GET',
-        Uri.parse(
-            'https://hotelbooking.alphawizzserver.com/api/coupon-banners'));
+        'GET', Uri.parse('https://hellostay.com/api/coupon-banners'));
 
     http.StreamedResponse response = await request.send();
 
@@ -173,47 +169,42 @@ class _HotelHomePageState extends State<HotelHomePage> {
   int childrenCount = 0;
   List<int> childrenAges = List.filled(0, 0);
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: InkWell(
         onTap: () {
-          int valid=0;
-          bool containsNull = childrenCountListOfList.any((list) => list.contains(null));
+          int valid = 0;
+          bool containsNull =
+              childrenCountListOfList.any((list) => list.contains(null));
           // for(int i=0;i<room ;i++)
           //   {
           //     for(int k=0;k<)
           //     valid+=childrenCountListOfList[i].length;
           //   }
-          bool isFirstElementNull = adultCountList.isNotEmpty ;
+          bool isFirstElementNull = adultCountList.isNotEmpty;
 
           bool isLessThan1 = true;
           for (int i = 0; i < adultCountList.length; i++) {
-print(adultCountList[i].toString()+"ADULT COUNT");
-      if(adultCountList[i]<1){
+            print(adultCountList[i].toString() + "ADULT COUNT");
+            if (adultCountList[i] < 1) {
               isLessThan1 = true;
               Fluttertoast.showToast(msg: "Please add  adults in all rooms");
-              return ;
-            }else{
+              return;
+            } else {
               isLessThan1 = false;
             }
             Map<String, String> guestData = {
-
-
               'tot_adults[$i]': adultCountList[i].toString(),
-
               'tot_children[$i]': childrenCountList[i].toString(),
               'children_age[$i]': childrenCountListOfList[i].toString()
             };
-         //   guestsList.add(guestData);
+            //   guestsList.add(guestData);
           }
           print('roomscounts------${childrenCountList.length}');
           print('rooms counts------${childrenCountListOfList.length}');
           print('rooms counts------${childrenCount1}');
           print('rooms counts------${isFirstElementNull}');
-
 
           // for(int i=0;i<childrenCountList.length; i++)
           //   {
@@ -223,7 +214,7 @@ print(adultCountList[i].toString()+"ADULT COUNT");
           // childrenCountList[i].toString(),
           // 'children_age[$i]': childrenCountListOfList[i].toString()
 
-          if(containsNull==false) {
+          if (containsNull == false) {
             print('api address ${_controller.text}');
             Navigator.push(
                 context,
@@ -241,7 +232,7 @@ print(adultCountList[i].toString()+"ADULT COUNT");
                     long: '',
                   ),
                 ));
-          } else{
+          } else {
             Fluttertoast.showToast(msg: "Please Select Child Age");
           }
         },
@@ -281,11 +272,8 @@ print(adultCountList[i].toString()+"ADULT COUNT");
             width: 12,
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               share();
-
-
-
             },
             child: Icon(
               Icons.share_outlined,
@@ -429,9 +417,7 @@ print(adultCountList[i].toString()+"ADULT COUNT");
                     setState(() {
                       print("adddddrrrreeeees $result.description");
                       _controller.text = result.description;
-                      setState(() {
-
-                      });
+                      setState(() {});
                       print("adddddrrrreeeees $_controller.text");
                     });
                   }
@@ -446,13 +432,8 @@ print(adultCountList[i].toString()+"ADULT COUNT");
                 },
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                  fontSize: 16,
-                 fontFamily: 'rubic',
-                  color: Colors.black
-                ),
-
+                    fontSize: 16, fontFamily: 'rubic', color: Colors.black),
                 decoration: InputDecoration(
-
                   hintText: 'Select',
                   hintStyle: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -487,9 +468,9 @@ print(adultCountList[i].toString()+"ADULT COUNT");
                         //String date = await selectDate(context);
                         await showCalanderDatePicker(context);
 
-                       // checkInDate = date;
+                        // checkInDate = date;
                         String date = checkInDate;
-                        print(checkInDate +'sdjkfhshdfhshfsh');
+                        print(checkInDate + 'sdjkfhshdfhshfsh');
 
                         formattedCheckInDate = DateFormat("dd MMM''yy")
                             .format(DateTime.parse(date));
@@ -498,7 +479,7 @@ print(adultCountList[i].toString()+"ADULT COUNT");
                             DateFormat("EEEE").format(DateTime.parse(date));
 
                         ///for automate checkout date-------------------------------------------------
-                       /* checkOutDate = DateTime.parse(date)
+                        /* checkOutDate = DateTime.parse(date)
                             .add(const Duration(days: 5))
                             .toString();*/
 
@@ -514,7 +495,6 @@ print(adultCountList[i].toString()+"ADULT COUNT");
                           isCheckOutSelected = false;
                         });
                       },
-
                       child: selectDateWidget('Check-in', checkInDayOfWeek,
                           formattedCheckInDate, isCheckInSelected, context)),
                   const Icon(
@@ -543,7 +523,7 @@ print(adultCountList[i].toString()+"ADULT COUNT");
 
                         // checkInDate = date;
                         String date = checkInDate;
-                        print(checkInDate +'sdjkfhshdfhshfsh');
+                        print(checkInDate + 'sdjkfhshdfhshfsh');
 
                         formattedCheckInDate = DateFormat("dd MMM''yy")
                             .format(DateTime.parse(date));
@@ -568,7 +548,6 @@ print(adultCountList[i].toString()+"ADULT COUNT");
                           isCheckOutSelected = false;
                         });
                       },
-
                       child: selectDateWidget('Check-Out', checkOutDayOfWeek,
                           formattedCheckOutDate, isCheckOutSelected, context)),
                   /*Column(
@@ -630,11 +609,9 @@ print(adultCountList[i].toString()+"ADULT COUNT");
             ),
           ),
 
-
-
           const SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.only(left: 20,top: 10),
+              padding: EdgeInsets.only(left: 20, top: 10),
               child: Text(
                 "Top Destinations",
                 style: TextStyle(fontSize: 16, fontFamily: 'rubic'),
@@ -694,11 +671,11 @@ print(adultCountList[i].toString()+"ADULT COUNT");
             child: CarouselSlider(
               options: CarouselOptions(
                 viewportFraction: 1,
-                height:230,
+                height: 230,
                 // enlargeCenterPage: true,
                 enableInfiniteScroll: true,
                 autoPlay: true,
-               // enlargeCenterPage: true,
+                // enlargeCenterPage: true,
               ),
               items: homeBannerModel?.data?.map((item) {
                 return Builder(
@@ -759,13 +736,8 @@ print(adultCountList[i].toString()+"ADULT COUNT");
     return await Geolocator.getCurrentPosition();
   }
 
-
-
-
   // CitySearchModel? citySearchModel;
   TrendingHotelModel? imageTrendingModel;
-
-
 
   trendingHotel() async {
     var request = http.Request('GET', Uri.parse("${baseUrl1}hotel/trending"));
@@ -816,7 +788,7 @@ print(adultCountList[i].toString()+"ADULT COUNT");
               .width, // Set the width to the screen width
           child: CarouselSlider(
             options: CarouselOptions(
-              // height: 200,
+              height: 240,
               // Adjust height as needed
               viewportFraction: 1,
               // enlargeCenterPage: true,
@@ -833,7 +805,8 @@ print(adultCountList[i].toString()+"ADULT COUNT");
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
-                    margin: const EdgeInsets.all(20.0),
+                    margin: const EdgeInsets.only(
+                        left: 10, right: 10, top: 20, bottom: 20),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5.0),
                       child: Material(
@@ -847,12 +820,12 @@ print(adultCountList[i].toString()+"ADULT COUNT");
                             Stack(
                               children: <Widget>[
                                 Container(
-                                  height: 160,
+                                  height: 200,
                                   decoration: BoxDecoration(
                                     color: Colors.black45.withOpacity(0.1),
                                     image: DecorationImage(
                                       image: NetworkImage(image),
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                 ),
@@ -947,8 +920,8 @@ print(adultCountList[i].toString()+"ADULT COUNT");
   Widget _buildRooms2(BuildContext context, item) {
     // Replace YourItemType with the actual type of homeBannerModel?.data
     return Container(
-     height: 200,
-     // width: MediaQuery.of(context).size.width / 1,
+      height: 200,
+      // width: MediaQuery.of(context).size.width / 1,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ClipRRect(
@@ -958,7 +931,7 @@ print(adultCountList[i].toString()+"ADULT COUNT");
               Image.network(
                 item?.bgImage ?? "",
                 fit: BoxFit.fill,
-               height: 200,
+                height: 200,
                 //width: MediaQuery.of(context).size.width / 1.05,
               ),
             ],
@@ -1217,13 +1190,13 @@ print(adultCountList[i].toString()+"ADULT COUNT");
       ),
     );
   }
-  Future<void> share({String? referCode})  async {
+
+  Future<void> share({String? referCode}) async {
     FlutterShare.share(
         title: 'HELLOSTAY',
         text: "HELLOSTAY",
         linkUrl: 'https://g.co/kgs/urtYWPz',
-        chooserTitle: 'Example Chooser Title'
-    );
+        chooserTitle: 'Example Chooser Title');
   }
 
   Widget showPeopleDialouge(BuildContext cntxtt) {
@@ -1535,7 +1508,4 @@ class Category extends StatelessWidget {
       ),
     );
   }
-
-
-
 }
