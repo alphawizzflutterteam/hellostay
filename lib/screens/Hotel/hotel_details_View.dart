@@ -975,8 +975,9 @@ class _HotelDetailsScreenState extends State<HotelDetailsScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(
-                flag ? 1 : hotelDetailsResponse?.data.policy?.length ?? 0,
-                (index) {
+                flag && (hotelDetailsResponse?.data.policy?.isNotEmpty ?? true)
+                    ? 1
+                    : hotelDetailsResponse?.data.policy?.length ?? 0, (index) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

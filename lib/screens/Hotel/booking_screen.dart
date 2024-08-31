@@ -55,7 +55,7 @@ class _BookingScreenState extends State<BookingScreen>
 
   List<BookingData> hotelList = [];
   BookingScreenModel? bookingScreenModel;
-  String formattedDate='';
+  String formattedDate = '';
   @override
   void initState() {
     // TODO: implement initState
@@ -66,16 +66,17 @@ class _BookingScreenState extends State<BookingScreen>
     // getBookingList();
   }
 
-
   bool isCheckInLessThan72Hours(String checkInDateString) {
     // Current date and time
     DateTime currentDateTime = DateTime.now();
 
     // Parse the provided check-in date string into a DateTime object
-    DateTime providedCheckInDate = DateFormat("dd MMM yyyy").parse(checkInDateString);
+    DateTime providedCheckInDate =
+        DateFormat("dd MMM yyyy").parse(checkInDateString);
 
     // Set the time for the check-in date to 12:00 PM
-    providedCheckInDate = DateTime(providedCheckInDate.year, providedCheckInDate.month, providedCheckInDate.day, 12, 0);
+    providedCheckInDate = DateTime(providedCheckInDate.year,
+        providedCheckInDate.month, providedCheckInDate.day, 12, 0);
 
     // Calculate the time difference in hours
     Duration timeDifference = providedCheckInDate.difference(currentDateTime);
@@ -89,18 +90,17 @@ class _BookingScreenState extends State<BookingScreen>
   var token;
   Future<void> checkLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    token=  prefs.getString('userToken');
+    token = prefs.getString('userToken');
     print("===my technic==token =====${token}===============");
-    setState(() {
-
-    });
-    if(token==null)
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+    setState(() {});
+    if (token == null)
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => LoginPage()));
   }
 
   getBookingApi() async {
     setState(() {
-      loading=true;
+      loading = true;
     });
     apiBaseHelper.getAPICall(getBookingApiUrl).then((value) {
       print('${getBookingApiUrl}');
@@ -111,17 +111,13 @@ class _BookingScreenState extends State<BookingScreen>
         bookingScreenModel = BookingScreenModel.fromJson(value);
         hotelList = bookingScreenModel?.data ?? [];
         setState(() {
-          loading=false;
+          loading = false;
 
           // print('date ----------${hotelList[0].startDate ?? ' '}');
           //print('date ----------${hotelList[0]. ?? ' '}');
-
-
         });
       } else {
-        setState(() {
-
-        });
+        setState(() {});
       }
     });
   }
@@ -140,7 +136,6 @@ class _BookingScreenState extends State<BookingScreen>
             style: TextStyle(
                 fontFamily: "rubic",
                 fontSize: 20.0,
-
                 color: AppColors.blackTemp),
           ),
         ),
@@ -166,331 +161,407 @@ class _BookingScreenState extends State<BookingScreen>
         // ),
       ),
 
-     // body: hotelCard(),
-      body: !loading ? Padding(
-        padding: const EdgeInsets.all(8.0),
-        child:hotelCard()
-        // tabController!.index == 0 ? hotelCard() : tabController!.index ==
-        //     1 ? flightCard() : tabController!.index == 3
-        //     ? tourCard()
-        //     : busCard(),
-      ) : const Center(child: CircularProgressIndicator(),),
+      // body: hotelCard(),
+      body: !loading
+          ? Padding(padding: const EdgeInsets.all(8.0), child: hotelCard()
+              // tabController!.index == 0 ? hotelCard() : tabController!.index ==
+              //     1 ? flightCard() : tabController!.index == 3
+              //     ? tourCard()
+              //     : busCard(),
+              )
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 
-
   dynamic rules;
 
-
   hotelCard() {
-    return hotelList.isNotEmpty ? ListView.builder(
-        shrinkWrap: true,
-        itemCount: hotelList.length,
-        itemBuilder: (context, i) {
-          return InkWell(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> BookingDetails(booking_code: hotelList[i].code ?? ""))).then((value) {
-                if(value !=null){
-                  getBookingApi();
-                }
-              });
-            },
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return hotelList.isNotEmpty
+        ? ListView.builder(
+            shrinkWrap: true,
+            itemCount: hotelList.length,
+            itemBuilder: (context, i) {
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BookingDetails(
+                                  booking_code: hotelList[i].code ?? "")))
+                      .then((value) {
+                    if (value != null) {
+                      getBookingApi();
+                    }
+                  });
+                },
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Container(decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.0),
-                            color: Colors.grey.withOpacity(0.5),
-
-                          ),
-                              padding: const EdgeInsets.all(8.0),
-
-                              child: Text("B.ID-${hotelList[i].id}",
-                                style: const TextStyle(color: Colors.black,
-                                    fontWeight: FontWeight.bold,fontFamily: "rubic"),)),
-                        ),
-                        const SizedBox(width: 5,),
-                        Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              color: hotelList[i].status ==
-                                  "PENDING" ? Colors.orange : hotelList[i].status == "SUCCESS"
-                                  ? Colors.green
-                                  : AppColors.primary,
-
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    color: Colors.grey.withOpacity(0.5),
+                                  ),
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "B.ID-${hotelList[i].id}",
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "rubic"),
+                                  )),
                             ),
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text(
-                              "${hotelList[i].status}",
-                              style: TextStyle(fontFamily: "rubic",color: AppColors.whiteTemp),)),
-                      ],
-                    ),
-                    const Divider(),
-                    const SizedBox(height: 5,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("${hotelList[i].service?.title}", style: Theme
-                            .of(context)
-                            .primaryTextTheme
-                            .titleLarge!
-                            .copyWith(color: AppColors.blackTemp,fontSize: 16,fontWeight: FontWeight.bold,fontFamily: "rubic"),),
-                        InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> BookingDetails(booking_code: hotelList[i].code ?? ""))).then((value) {
-                                if(value !=null){
-                                   getBookingApi();
-                                }
-                              });
-                            },
-                            child: const Text("Details",style: TextStyle(color: AppColors.secondary,fontSize: 16,fontFamily: "rubic"),))
-                      ],
-                    ),
-                    // const SizedBox(height: 4,),
-                    // Row(
-                    //   children: [
-                    //     const Expanded(child: Text("Indore",style: TextStyle(fontSize: 18,fontFamily: "rubic"))),
-                    //     IconButton(onPressed: () async {
-                    //
-                    //
-                    //       String googleUrl = 'https://www.google.com/maps/search/?api=1&query=,}';
-                    //       if (await canLaunch(googleUrl)) {
-                    //         await launch(googleUrl);
-                    //       } else {
-                    //         throw 'Could not open the map.';
-                    //       }
-                    //     }, icon: const Icon(Icons.location_on_outlined,color: AppColors.primary,)),
-                    //   ],
-                    // ),
-                    const SizedBox(height: 8,),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Column(
-
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Check In",
-                                style: Theme
-                                    .of(context)
-                                    .primaryTextTheme
-                                    .bodyMedium!
-                                    .copyWith(color: AppColors.secondary,fontFamily: "rubic"),
-                              ),
-                              const SizedBox(height: 5,),
-                              Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: AppColors.faqanswerColor,
-                                  ),
-
-
-                                  child:  Text(" ${DateFormat("dd MMM yyyy ")
-                                      .format(DateTime.parse(
-                                      hotelList[i].startDate??''))} ",
-                                    style: const TextStyle(color: AppColors.whiteTemp,fontFamily: "rubic"),)
-
-                                // Text(
-                                //   " ${hotelList[i].startDate?.substring(0,11)} ",
-                                //   style: Theme
-                                //       .of(context)
-                                //       .primaryTextTheme
-                                //       .bodyLarge!
-                                //       .copyWith(color: AppColors.whiteTemp,fontSize: 15),
-                                // ),
-                              ),
-                            ],
-                          ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  color: hotelList[i].status == "PENDING"
+                                      ? Colors.orange
+                                      : hotelList[i].status == "SUCCESS"
+                                          ? Colors.green
+                                          : hotelList[i].status == "processing"
+                                              ? Colors.orange
+                                              : AppColors.primary,
+                                ),
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text(
+                                  "${hotelList[i].status}",
+                                  style: TextStyle(
+                                      fontFamily: "rubic",
+                                      color: AppColors.whiteTemp),
+                                )),
+                          ],
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                "Check Out",
-                                style: Theme
-                                    .of(context)
-                                    .primaryTextTheme
-                                    .bodyMedium!
-                                    .copyWith(color: AppColors.secondary,fontFamily: "rubic"),
-                              ),
-                              const SizedBox(height: 5,),
-                              Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: AppColors.faqanswerColor,
-                                  ),
-
-                                  child:Text(" ${DateFormat("dd MMM yyyy ")
-                                      .format(DateTime.parse(
-                                      hotelList[i].endDate??''))} ",
-                                    style: const TextStyle(color: AppColors.whiteTemp,fontFamily: "rubic"),)
-
-                                // Text(
-                                //   " ${hotelList[i].endDate?.substring(0,11)} ",
-                                //   style: Theme
-                                //       .of(context)
-                                //       .primaryTextTheme
-                                //       .bodyLarge!
-                                //       .copyWith(color: AppColors.whiteTemp,fontSize: 15),
-                                // ),
-                              ),
-                            ],
-                          ),
+                        const Divider(),
+                        const SizedBox(
+                          height: 5,
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 8,),
-                    Text("Room Info.", style: Theme
-                        .of(context)
-                        .primaryTextTheme
-                        .titleLarge!
-                        .copyWith(color: Colors.black,fontSize: 16,fontFamily: "rubic"),),
-                    const SizedBox(height: 5,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "${hotelList[i].service?.title}",
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .titleLarge!
+                                  .copyWith(
+                                      color: AppColors.blackTemp,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "rubic"),
+                            ),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => BookingDetails(
+                                              booking_code: hotelList[i].code ??
+                                                  ""))).then((value) {
+                                    if (value != null) {
+                                      getBookingApi();
+                                    }
+                                  });
+                                },
+                                child: const Text(
+                                  "Details",
+                                  style: TextStyle(
+                                      color: AppColors.secondary,
+                                      fontSize: 16,
+                                      fontFamily: "rubic"),
+                                ))
+                          ],
+                        ),
+                        // const SizedBox(height: 4,),
+                        // Row(
+                        //   children: [
+                        //     const Expanded(child: Text("Indore",style: TextStyle(fontSize: 18,fontFamily: "rubic"))),
+                        //     IconButton(onPressed: () async {
+                        //
+                        //
+                        //       String googleUrl = 'https://www.google.com/maps/search/?api=1&query=,}';
+                        //       if (await canLaunch(googleUrl)) {
+                        //         await launch(googleUrl);
+                        //       } else {
+                        //         throw 'Could not open the map.';
+                        //       }
+                        //     }, icon: const Icon(Icons.location_on_outlined,color: AppColors.primary,)),
+                        //   ],
+                        // ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Check In",
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                            color: AppColors.secondary,
+                                            fontFamily: "rubic"),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: AppColors.faqanswerColor,
+                                      ),
+                                      child: Text(
+                                        " ${DateFormat("dd MMM yyyy ").format(DateTime.parse(hotelList[i].startDate ?? ''))} ",
+                                        style: const TextStyle(
+                                            color: AppColors.whiteTemp,
+                                            fontFamily: "rubic"),
+                                      )
+
+                                      // Text(
+                                      //   " ${hotelList[i].startDate?.substring(0,11)} ",
+                                      //   style: Theme
+                                      //       .of(context)
+                                      //       .primaryTextTheme
+                                      //       .bodyLarge!
+                                      //       .copyWith(color: AppColors.whiteTemp,fontSize: 15),
+                                      // ),
+                                      ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    "Check Out",
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                            color: AppColors.secondary,
+                                            fontFamily: "rubic"),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: AppColors.faqanswerColor,
+                                      ),
+                                      child: Text(
+                                        " ${DateFormat("dd MMM yyyy ").format(DateTime.parse(hotelList[i].endDate ?? ''))} ",
+                                        style: const TextStyle(
+                                            color: AppColors.whiteTemp,
+                                            fontFamily: "rubic"),
+                                      )
+
+                                      // Text(
+                                      //   " ${hotelList[i].endDate?.substring(0,11)} ",
+                                      //   style: Theme
+                                      //       .of(context)
+                                      //       .primaryTextTheme
+                                      //       .bodyLarge!
+                                      //       .copyWith(color: AppColors.whiteTemp,fontSize: 15),
+                                      // ),
+                                      ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
                         Text(
-                          "Adults : ${hotelList[i].bookingMeta?.adults}",
-                          style: Theme
-                              .of(context)
+                          "Room Info.",
+                          style: Theme.of(context)
                               .primaryTextTheme
-                              .bodyLarge!
-                              .copyWith(color: Colors.black,fontFamily: "rubic",fontSize: 14),),
-                        Text("Children : ${hotelList[i].bookingMeta?.children}",
-                          style: Theme
-                              .of(context)
-                              .primaryTextTheme
-                              .bodyLarge!
-                              .copyWith(color: Colors.black,fontFamily: "rubic",fontSize: 14),),
-                      ],
-                    ),
-                    const SizedBox(height: 8,),
-                    const Divider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0),
-                          color: Colors.blue.withOpacity(0.6),
-
+                              .titleLarge!
+                              .copyWith(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: "rubic"),
                         ),
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(" ${DateFormat("dd MMM yyyy hh:mm a")
-                                .format(DateTime.parse(
-                                hotelList[i].createdAt??''))} ",
-                              style: const TextStyle(color: AppColors.whiteTemp,fontFamily: "rubic"),)
-
-                          // Text("${DateFormat("dd MMM yyyy ")
-                          //     .format(DateTime.parse(
-                          //     hotelList[i].createdAt ?? ''))}",
-                          //   style: const TextStyle(color: Colors.black,
-                          //       fontWeight: FontWeight.bold),)
+                        const SizedBox(
+                          height: 5,
                         ),
-                        Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              color: Colors.green,
-
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Adults : ${hotelList[i].bookingMeta?.adults}",
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                      color: Colors.black,
+                                      fontFamily: "rubic",
+                                      fontSize: 14),
                             ),
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text(
-                              "₹${hotelList[i].total}",
-                              style: TextStyle(fontFamily: "rubic",color: AppColors.whiteTemp),)),
+                            Text(
+                              "Children : ${hotelList[i].bookingMeta?.children}",
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                      color: Colors.black,
+                                      fontFamily: "rubic",
+                                      fontSize: 14),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        const Divider(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  color: Colors.blue.withOpacity(0.6),
+                                ),
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  " ${DateFormat("dd MMM yyyy hh:mm a").format(DateTime.parse(hotelList[i].createdAt ?? ''))} ",
+                                  style: const TextStyle(
+                                      color: AppColors.whiteTemp,
+                                      fontFamily: "rubic"),
+                                )
+
+                                // Text("${DateFormat("dd MMM yyyy ")
+                                //     .format(DateTime.parse(
+                                //     hotelList[i].createdAt ?? ''))}",
+                                //   style: const TextStyle(color: Colors.black,
+                                //       fontWeight: FontWeight.bold),)
+                                ),
+                            Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  color: Colors.green,
+                                ),
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text(
+                                  "₹${hotelList[i].total}",
+                                  style: TextStyle(
+                                      fontFamily: "rubic",
+                                      color: AppColors.whiteTemp),
+                                )),
+                          ],
+                        ),
+                        const Divider(),
+                        // if( DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day, ) == DateTime.parse(
+                        //     hotelList[i].startDate??''))
+                        if (hotelList[i].status != "cancelled" &&
+                            DateTime.now().isAfter(
+                                DateTime.parse(hotelList[i].startDate ?? '')))
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.secondary),
+                              onPressed: () async {
+                                String url =
+                                    'https://hellostay.com/api/user/${hotelList[i].code}/invoice?token=$authToken';
+                                if (await canLaunch(url)) {
+                                  await launch(url);
+                                } else {
+                                  throw 'Could not open the map.';
+                                }
+                              },
+                              child: const Text(
+                                'Download Invoice',
+                                style: TextStyle(
+                                    fontFamily: 'rubic',
+                                    color: AppColors.whiteTemp),
+                              ))
+                        // Row(
+                        //   children: [
+                        //     Expanded(
+                        //       child: InkWell(
+                        //         onTap: () {
+                        //           setState(() {
+                        //             downloadLoading = true;
+                        //           });
+                        //           downloadAndOpenFile(hotelList[i].code);
+                        //         },
+                        //         child: Container(
+                        //           width: double.infinity,
+                        //           decoration: BoxDecoration(
+                        //             color: Colors.deepOrange,
+                        //             borderRadius: BorderRadius.circular(5.0),
+                        //           ),
+                        //           padding: const EdgeInsets.all(15),
+                        //           child: Center(
+                        //             child: !downloadLoading ? const Text(
+                        //               "Invoice",
+                        //               style: TextStyle(
+                        //                 fontWeight: FontWeight.w500,
+                        //                 fontSize: 15.0,
+                        //                 color: Colors.white,
+                        //               ),
+                        //             ) : const CircularProgressIndicator(),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     const SizedBox(width: 8,),
+                        //     Expanded(
+                        //       child: InkWell(
+                        //         onTap: () {
+                        //           // cancelDialog(hotelList[i].id.toString());
+                        //         },
+                        //         child: Container(
+                        //           width: double.infinity,
+                        //           decoration: BoxDecoration(
+                        //             color: Colors.deepOrange,
+                        //             borderRadius: BorderRadius.circular(5.0),
+                        //           ),
+                        //           padding: const EdgeInsets.all(15),
+                        //           child: const Center(
+                        //             child: Text(
+                        //               "Cancel Booking",
+                        //               style: TextStyle(
+                        //                 fontWeight: FontWeight.w500,
+                        //                 fontSize: 15.0,
+                        //                 color: Colors.white,
+                        //               ),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
-                    const Divider(),
-                    // if( DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day, ) == DateTime.parse(
-                    //     hotelList[i].startDate??''))
-                      if(hotelList[i].status != "cancelled" && DateTime.now().isAfter(DateTime.parse(hotelList[i].startDate ?? ''  )))
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: AppColors.secondary),
-                        onPressed: () async{
-                     String url ='https://hellostay.com/api/user/${hotelList[i].code}/invoice?token=$authToken';
-                     if (await canLaunch(url)) {
-                      await launch(url);
-                      } else {
-                      throw 'Could not open the map.';
-                      }
-                    }, child: const Text('Download Invoice',style: TextStyle(fontFamily: 'rubic',color: AppColors.whiteTemp),))
-                    // Row(
-                    //   children: [
-                    //     Expanded(
-                    //       child: InkWell(
-                    //         onTap: () {
-                    //           setState(() {
-                    //             downloadLoading = true;
-                    //           });
-                    //           downloadAndOpenFile(hotelList[i].code);
-                    //         },
-                    //         child: Container(
-                    //           width: double.infinity,
-                    //           decoration: BoxDecoration(
-                    //             color: Colors.deepOrange,
-                    //             borderRadius: BorderRadius.circular(5.0),
-                    //           ),
-                    //           padding: const EdgeInsets.all(15),
-                    //           child: Center(
-                    //             child: !downloadLoading ? const Text(
-                    //               "Invoice",
-                    //               style: TextStyle(
-                    //                 fontWeight: FontWeight.w500,
-                    //                 fontSize: 15.0,
-                    //                 color: Colors.white,
-                    //               ),
-                    //             ) : const CircularProgressIndicator(),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     const SizedBox(width: 8,),
-                    //     Expanded(
-                    //       child: InkWell(
-                    //         onTap: () {
-                    //           // cancelDialog(hotelList[i].id.toString());
-                    //         },
-                    //         child: Container(
-                    //           width: double.infinity,
-                    //           decoration: BoxDecoration(
-                    //             color: Colors.deepOrange,
-                    //             borderRadius: BorderRadius.circular(5.0),
-                    //           ),
-                    //           padding: const EdgeInsets.all(15),
-                    //           child: const Center(
-                    //             child: Text(
-                    //               "Cancel Booking",
-                    //               style: TextStyle(
-                    //                 fontWeight: FontWeight.w500,
-                    //                 fontSize: 15.0,
-                    //                 color: Colors.white,
-                    //               ),
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
+              );
+            })
+        : const Center(
+            child: Text("No Hotel Booking Available"),
           );
-        }
-    ) : const Center(child: Text("No Hotel Booking Available"),);
   }
 
   final String fileUrl =

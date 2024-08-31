@@ -40,6 +40,7 @@ class _BookingDetailsState extends State<BookingDetails>
     getHotelDetails();
     tabController = TabController(length: 4, vsync: this);
   }
+
   late DateTime startDate;
   getHotelDetails() async {
     setState(() {
@@ -48,14 +49,13 @@ class _BookingDetailsState extends State<BookingDetails>
     apiBaseHelper
         .getAPICall(Uri.parse('${baseUrl1}booking/${widget.booking_code}'))
         .then((getData) {
+      bookingDetailsmodel = BookingDetailsmodel.fromJson(getData);
+      loading = false;
       setState(() {
-        bookingDetailsmodel = BookingDetailsmodel.fromJson(getData);
-        loading = false;
-
-        print('CCCCCCCCCCCCCCCCCC${isCheckInValid()}');
-
-        startDate =DateTime.parse(bookingDetailsmodel?.booking?.startDate ?? '');
+        print(
+            'CCCCCCCCCCCCCCCCCC${bookingDetailsmodel?.booking?.startDate ?? ''}');
       });
+      startDate = DateTime.parse(bookingDetailsmodel?.booking?.startDate ?? '');
     });
   }
 
@@ -64,7 +64,8 @@ class _BookingDetailsState extends State<BookingDetails>
     DateTime now = DateTime.now();
 
     // Check-in date
-    DateTime checkInDate = DateTime.parse(bookingDetailsmodel?.booking?.startDate ?? '');
+    DateTime checkInDate =
+        DateTime.parse(bookingDetailsmodel?.booking?.startDate ?? '');
 
     // Check-in time
     String? checkInTimeString = "12:00PM";
@@ -76,7 +77,12 @@ class _BookingDetailsState extends State<BookingDetails>
     TimeOfDay checkInTime = TimeOfDay(hour: hour, minute: minute);
 
     // Combine check-in date and time
-    DateTime combinedCheckInDateTime = DateTime(checkInDate.year, checkInDate.month, checkInDate.day, checkInTime.hour, checkInTime.minute);
+    DateTime combinedCheckInDateTime = DateTime(
+        checkInDate.year,
+        checkInDate.month,
+        checkInDate.day,
+        checkInTime.hour,
+        checkInTime.minute);
 
     // Calculate the difference in hours
     Duration difference = combinedCheckInDateTime.difference(now);
@@ -90,8 +96,6 @@ class _BookingDetailsState extends State<BookingDetails>
     // If the check-in date and time are 72 hours or more in the future, return true
     return true;
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +213,6 @@ class _BookingDetailsState extends State<BookingDetails>
                                 (_) {}, // Provide an empty function to disable editing
                           ),
                         )
-
                       ],
                     ),
                     const SizedBox(
@@ -429,7 +432,7 @@ class _BookingDetailsState extends State<BookingDetails>
                           .primaryTextTheme
                           .titleLarge!
                           .copyWith(
-                        fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.bold,
                               color: Colors.black,
                               fontSize: 16,
                               fontFamily: "rubic"),
@@ -494,13 +497,13 @@ class _BookingDetailsState extends State<BookingDetails>
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text("Mobile No.  : ",
-                                    style:TextStyle(
+                                    style: TextStyle(
                                         color: AppColors.blackTemp,
                                         fontFamily: "rubic",
                                         fontSize: 16)),
                                 Text(
                                   "${bookingDetailsmodel?.booking?.phone}",
-                                  style:TextStyle(
+                                  style: TextStyle(
                                       color: AppColors.blackTemp,
                                       fontFamily: "rubic",
                                       fontSize: 16),
@@ -511,13 +514,13 @@ class _BookingDetailsState extends State<BookingDetails>
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text("Email : ",
-                                    style:TextStyle(
+                                    style: TextStyle(
                                         color: AppColors.blackTemp,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16)),
                                 Text(
                                   "${bookingDetailsmodel?.booking?.email}",
-                                  style:TextStyle(
+                                  style: TextStyle(
                                       color: AppColors.blackTemp,
                                       fontFamily: "rubic",
                                       fontSize: 16),
@@ -534,7 +537,7 @@ class _BookingDetailsState extends State<BookingDetails>
                                         fontSize: 16)),
                                 Text(
                                   "${bookingDetailsmodel?.booking?.address},${bookingDetailsmodel?.booking?.city},${bookingDetailsmodel?.booking?.state},${bookingDetailsmodel?.booking?.country}",
-                                  style:TextStyle(
+                                  style: TextStyle(
                                       color: AppColors.blackTemp,
                                       fontFamily: "rubic",
                                       fontSize: 16),
@@ -656,63 +659,58 @@ class _BookingDetailsState extends State<BookingDetails>
                         Text(
                           "Total Amount :",
                           style: const TextStyle(
-                            color: AppColors.blackTemp,
-                            fontFamily: "rubic",
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16
-                          ),
-                        ),
-                        Text(
-                          "₹ ${bookingDetailsmodel?.booking?.total}",
-                          style: TextStyle(
-                              color: Colors.green,
+                              color: AppColors.blackTemp,
                               fontFamily: "rubic",
                               fontWeight: FontWeight.bold,
-                              fontSize: 16)
+                              fontSize: 16),
                         ),
+                        Text("₹ ${bookingDetailsmodel?.booking?.total}",
+                            style: TextStyle(
+                                color: Colors.green,
+                                fontFamily: "rubic",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16)),
                       ],
-                    ),     Row(
+                    ),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           "Advance Payment :",
                           style: const TextStyle(
-                            color: AppColors.blackTemp,
-                            fontFamily: "rubic",
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16
-                          ),
-                        ),
-                        Text(
-                          "-₹ ${bookingDetailsmodel?.booking?.paid ?? "0.00"}",
-                          style: TextStyle(
-                              color: Colors.green,
+                              color: AppColors.blackTemp,
                               fontFamily: "rubic",
                               fontWeight: FontWeight.bold,
-                              fontSize: 16)
+                              fontSize: 16),
                         ),
+                        Text(
+                            "-₹ ${bookingDetailsmodel?.booking?.paid ?? "0.00"}",
+                            style: TextStyle(
+                                color: Colors.green,
+                                fontFamily: "rubic",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16)),
                       ],
                     ),
                     const Divider(),
-                     Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           "Pay At Hotel :",
                           style: const TextStyle(
-                            color: AppColors.blackTemp,
-                            fontFamily: "rubic",
+                              color: AppColors.blackTemp,
+                              fontFamily: "rubic",
                               fontWeight: FontWeight.bold,
-                              fontSize: 16
-                          ),
+                              fontSize: 16),
                         ),
                         Text(
-                          "₹ ${double.parse(bookingDetailsmodel?.booking?.total ?? "0.00")- double.parse(bookingDetailsmodel?.booking?.paid ?? "0.00")}",
-                          style:TextStyle(color: Colors.red,fontFamily: "rubic",
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16)
-
-                        ),
+                            "₹ ${double.parse(bookingDetailsmodel?.booking?.total ?? "0.00") - double.parse(bookingDetailsmodel?.booking?.paid ?? "0.00")}",
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontFamily: "rubic",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16)),
                       ],
                     ),
                     const Divider(),
@@ -745,7 +743,8 @@ class _BookingDetailsState extends State<BookingDetails>
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: bookingDetailsmodel
-                            ?.booking?.service?.policy?.length,
+                                ?.booking?.service?.policy?.length ??
+                            0,
                         itemBuilder: (context, index) {
                           return Card(
                             color: AppColors.halfWhite,
@@ -764,7 +763,7 @@ class _BookingDetailsState extends State<BookingDetails>
                                           fontSize: 16)),
                                   Text(
                                     "${bookingDetailsmodel?.booking?.service!.policy?[index].content}",
-                                    style:TextStyle(
+                                    style: TextStyle(
                                         color: AppColors.faqanswerColor,
                                         fontFamily: "rubic",
                                         fontSize: 16),
@@ -776,7 +775,9 @@ class _BookingDetailsState extends State<BookingDetails>
                         },
                       ),
                     ),
-                    bookingDetailsmodel?.booking?.status == 'cancelled' || DateTime.now().isAfter(startDate) || DateTime.now().isAtSameMomentAs(startDate)
+                    bookingDetailsmodel?.booking?.status == 'cancelled' ||
+                            DateTime.now().isAfter(startDate) ||
+                            DateTime.now().isAtSameMomentAs(startDate)
                         ? const SizedBox()
                         : Padding(
                             padding: const EdgeInsets.only(
@@ -799,15 +800,11 @@ class _BookingDetailsState extends State<BookingDetails>
                     ));
                   }*/
 
-
-                                    if(isCheckInValid())
-                                    {
-                                      _showCustomDialog();
-                                    }
-                                    else{
-                                      _cancelPolicy(context);
-
-                                    }
+                                if (isCheckInValid()) {
+                                  _showCustomDialog();
+                                } else {
+                                  _cancelPolicy(context);
+                                }
 
                                 // _showCustomDialog();
                               },
@@ -931,33 +928,40 @@ class _BookingDetailsState extends State<BookingDetails>
               children: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,),
+                    backgroundColor: AppColors.primary,
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('No',style: TextStyle(color: AppColors.white,fontFamily: "rubic"),),
+                  child: const Text(
+                    'No',
+                    style:
+                        TextStyle(color: AppColors.white, fontFamily: "rubic"),
+                  ),
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,),
+                    backgroundColor: AppColors.primary,
+                  ),
                   onPressed: () {
                     // Do something with the inputText
                     // print('Input Text: $inputText');
                     cancelHotel('');
                     Navigator.of(context).pop();
                   },
-                  child: Text('Yes',style: TextStyle(color: AppColors.white,fontFamily: "rubic"),),
+                  child: Text(
+                    'Yes',
+                    style:
+                        TextStyle(color: AppColors.white, fontFamily: "rubic"),
+                  ),
                 ),
               ],
             ),
-
           ],
         );
       },
     );
   }
-
-
 
   void _cancelPolicy(BuildContext context) {
     showDialog(
@@ -968,36 +972,46 @@ class _BookingDetailsState extends State<BookingDetails>
         return AlertDialog(
           title: const Text(
             'Cancellation Policy',
-            style: TextStyle(fontFamily: "rubic",fontSize: 18),
+            style: TextStyle(fontFamily: "rubic", fontSize: 18),
           ),
           content: Container(
             height: 80,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-               // Text("hotelbooking.alphawizzserver.com says",style: TextStyle(fontFamily: "rubic",fontSize: 14),),
-                Text("Your booking amount is non-refundabale as per the cancellation Policy",style: TextStyle(fontFamily: "rubic",fontSize: 14,color: Colors.grey),),
-                SizedBox(height: 5,),
-
+                // Text("hotelbooking.alphawizzserver.com says",style: TextStyle(fontFamily: "rubic",fontSize: 14),),
+                Text(
+                  "Your booking amount is non-refundabale as per the cancellation Policy",
+                  style: TextStyle(
+                      fontFamily: "rubic", fontSize: 14, color: Colors.grey),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
               ],
             ),
           ),
-
           actions: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,),
+                    backgroundColor: AppColors.primary,
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Cancel',style: TextStyle(color: AppColors.white,fontFamily: "rubic"),),
+                  child: const Text(
+                    'Cancel',
+                    style:
+                        TextStyle(color: AppColors.white, fontFamily: "rubic"),
+                  ),
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,),
+                    backgroundColor: AppColors.primary,
+                  ),
                   onPressed: () {
                     _showCustomDialog();
                     // Do something with the inputText
@@ -1005,7 +1019,11 @@ class _BookingDetailsState extends State<BookingDetails>
                     // cancelHotel('');
                     // Navigator.of(context).pop();
                   },
-                  child: Text('OK',style: TextStyle(color: AppColors.white,fontFamily: "rubic"),),
+                  child: Text(
+                    'OK',
+                    style:
+                        TextStyle(color: AppColors.white, fontFamily: "rubic"),
+                  ),
                 ),
               ],
             ),

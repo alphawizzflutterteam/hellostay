@@ -126,7 +126,9 @@ class HotelDetailData {
       reviewScore: DataReviewScore.fromJson(json["review_score"]),
       reviewStats: List<String>.from(json["review_stats"].map((x) => x)),
       reviewLists: ReviewLists.fromJson(json["review_lists"]),
-      policy: List<Policy>.from(json["policy"].map((x) => Policy.fromJson(x))),
+      policy: json["policy"] == null
+          ? []
+          : List<Policy>.from(json["policy"].map((x) => Policy.fromJson(x))),
       starRate: json["star_rate"],
       checkInTime: json["check_in_time"],
       checkOutTime: json["check_out_time"],

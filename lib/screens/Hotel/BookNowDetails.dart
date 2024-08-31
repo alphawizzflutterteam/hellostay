@@ -62,7 +62,7 @@ class _BookNowDetailsState extends State<BookNowDetails> {
 
   CheckoutModel? checkoutModel;
 
-  getCheckOutApi() async {
+  Future<void> getCheckOutApi() async {
     var request = http.Request(
         'GET',
         Uri.parse(
@@ -81,6 +81,7 @@ class _BookNowDetailsState extends State<BookNowDetails> {
       setState(() {
         //   print(homeBannerModel?.data?.length);
       });
+      print(request.url);
     } else {
       print(response.reasonPhrase);
     }
@@ -115,6 +116,8 @@ class _BookNowDetailsState extends State<BookNowDetails> {
     request.fields.addAll({'coupon_code': selectedOption ?? ""});
 
     http.StreamedResponse response = await request.send();
+    print(request.url);
+    print('coupon_code${selectedOption}');
 
     if (response.statusCode == 200) {
       var result = await response.stream.bytesToString();
@@ -122,9 +125,7 @@ class _BookNowDetailsState extends State<BookNowDetails> {
       String applyCoupon = finalReslut['status'].toString();
       couponNotApply = applyCoupon;
       couponMessage = finalReslut['message'].toString();
-      setState(() {
-
-      });
+      setState(() {});
       print("coupon--------");
       print(couponNotApply);
       print(couponMessage);
@@ -137,12 +138,14 @@ class _BookNowDetailsState extends State<BookNowDetails> {
         setState(
           () {},
         );
-        await getCheckOutApi();
-        _showCouponAppliedDialog();
+        await getCheckOutApi().then((value) {
+          _showCouponAppliedDialog();
+        });
 
-        setState(
-          () {},
-        );
+        //
+        // setState(
+        //   () {},
+        // );
       }
       // setState(() {
       //
@@ -176,7 +179,9 @@ class _BookNowDetailsState extends State<BookNowDetails> {
         // print(await response.stream.bytesToString());
         print("coupon-remove-api------------");
         setState(() {
-          getCheckOutApi();
+          getCheckOutApi().then((value) {
+            couponApply();
+          });
         });
       }
     } else {
@@ -598,9 +603,7 @@ class _BookNowDetailsState extends State<BookNowDetails> {
                                       print("elase--------");
                                       //selectedOptionCurrent= value.toString();
                                       selectedOption = value.toString();
-                                      setState(() {
-
-                                      });
+                                      setState(() {});
                                       couponApply();
                                     }
                                     setState(() {});
@@ -654,9 +657,13 @@ class _BookNowDetailsState extends State<BookNowDetails> {
                             Text(
                               "Tariff Details",
                               style: const TextStyle(
-                                  fontSize: 18, fontFamily: "rubic",fontWeight: FontWeight.bold),
+                                  fontSize: 18,
+                                  fontFamily: "rubic",
+                                  fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(height: 10,),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -696,7 +703,6 @@ class _BookNowDetailsState extends State<BookNowDetails> {
                               ],
                             ),
                             Divider(),
-
 
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -741,23 +747,25 @@ class _BookNowDetailsState extends State<BookNowDetails> {
                             ),
                             Divider(),
 
-
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   "You Pay :",
                                   style: const TextStyle(
-                                      fontSize: 16, fontFamily: "rubic",fontWeight: FontWeight.bold),
+                                      fontSize: 16,
+                                      fontFamily: "rubic",
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 Text(
                                   "₹${checkoutModel?.booking?.total ?? ""}",
                                   style: const TextStyle(
-                                      fontSize: 16, fontFamily: "rubic",fontWeight: FontWeight.bold),
+                                      fontSize: 16,
+                                      fontFamily: "rubic",
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
-
                           ],
                         ),
                       )

@@ -342,7 +342,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
               color: AppColors.faqanswerColor.withOpacity(0.1),
               child: InkWell(
                 onTap: () async {
-                  var posstion = await _determinePosition();
+                  var posstion = await _determinePosition(context);
                   lat = posstion.latitude;
                   lng = posstion.longitude;
                   searchC.text = 'Near Me';
@@ -671,7 +671,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
             child: CarouselSlider(
               options: CarouselOptions(
                 viewportFraction: 1,
-                height: 230,
+                height: 216,
                 // enlargeCenterPage: true,
                 enableInfiniteScroll: true,
                 autoPlay: true,
@@ -698,7 +698,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
     );
   }
 
-  Future<Position> _determinePosition() async {
+  Future<Position> _determinePosition(BuildContext context) async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -706,9 +706,6 @@ class _HotelHomePageState extends State<HotelHomePage> {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       Fluttertoast.showToast(msg: "Location services are disabled");
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
       return Future.error('Location services are disabled.');
     }
 
@@ -716,25 +713,75 @@ class _HotelHomePageState extends State<HotelHomePage> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
         return Future.error('Location permissions are denied');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
+      // Permissions are denied forever, show dialog to the user.
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Location Permission"),
+            content: Text(
+                "Location permissions are permanently denied. Please enable the permissions in the app settings."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Geolocator.openAppSettings();
+                },
+                child: Text("Open Settings"),
+              ),
+            ],
+          );
+        },
+      );
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
 
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
+    // Permissions are granted, continue accessing the position.
     return await Geolocator.getCurrentPosition();
   }
+  // Future<Position> _determinePosition() async {
+  //   bool serviceEnabled;
+  //   LocationPermission permission;
+  //
+  //   // Test if location services are enabled.
+  //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  //   if (!serviceEnabled) {
+  //     Fluttertoast.showToast(msg: "Location services are disabled");
+  //     // Location services are not enabled don't continue
+  //     // accessing the position and request users of the
+  //     // App to enable the location services.
+  //     return Future.error('Location services are disabled.');
+  //   }
+  //
+  //   permission = await Geolocator.checkPermission();
+  //   if (permission == LocationPermission.denied) {
+  //     permission = await Geolocator.requestPermission();
+  //     if (permission == LocationPermission.denied) {
+  //       // Permissions are denied, next time you could try
+  //       // requesting permissions again (this is also where
+  //       // Android's shouldShowRequestPermissionRationale
+  //       // returned true. According to Android guidelines
+  //       // your App should show an explanatory UI now.
+  //       return Future.error('Location permissions are denied');
+  //     }
+  //   }
+  //
+  //   if (permission == LocationPermission.deniedForever) {
+  //     // Permissions are denied forever, handle appropriately.
+  //     return Future.error(
+  //         'Location permissions are permanently denied, we cannot request permissions.');
+  //   }
+  //
+  //   // When we reach here, permissions are granted and we can
+  //   // continue accessing the position of the device.
+  //   return await Geolocator.getCurrentPosition();
+  // }
 
   // CitySearchModel? citySearchModel;
   TrendingHotelModel? imageTrendingModel;
