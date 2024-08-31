@@ -60,8 +60,8 @@ class _BookingScreenState extends State<BookingScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
-    checkLogin();
-    getBookingApi();
+    checkLogin().then((value) => getBookingApi());
+    // getBookingApi();
     tabController = TabController(length: 4, vsync: this);
     // getBookingList();
   }
@@ -107,18 +107,19 @@ class _BookingScreenState extends State<BookingScreen>
       print(authToken);
       print("booking list-----------");
       var status = value['status'].toString();
-      if (status == '1') {
-        bookingScreenModel = BookingScreenModel.fromJson(value);
-        hotelList = bookingScreenModel?.data ?? [];
-        setState(() {
-          loading = false;
+      // if (status == '1') {
+      bookingScreenModel = BookingScreenModel.fromJson(value);
+      print(bookingScreenModel?.data?.length ?? '');
+      hotelList = bookingScreenModel?.data ?? [];
+      setState(() {
+        loading = false;
 
-          // print('date ----------${hotelList[0].startDate ?? ' '}');
-          //print('date ----------${hotelList[0]. ?? ' '}');
-        });
-      } else {
-        setState(() {});
-      }
+        // print('date ----------${hotelList[0].status ?? ' '}');
+        // print('date ----------${hotelList[0]. ?? ' '}');
+      });
+      // } else {
+      //   setState(() {});
+      // }
     });
   }
 

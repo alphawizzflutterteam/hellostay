@@ -391,6 +391,15 @@ class _MyWalletState extends State<MyWallet> {
                                               fontSize: 15.0,
                                               fontFamily: 'rubic'),
                                         ),
+                                        walletModel!.data?[index].remarks ==
+                                                null
+                                            ? SizedBox()
+                                            : Text(
+                                                'Note: ${walletModel!.data?[index].remarks}',
+                                                style: const TextStyle(
+                                                    fontSize: 15.0,
+                                                    fontFamily: 'rubic'),
+                                              ),
                                         //const SizedBox(height: 5.0),
                                         Text(
                                           '${walletModel?.data?[index].description.toString().replaceAll(', ', '\n').replaceAll(',', '\n')}',

@@ -138,12 +138,10 @@ class _HotelHomePageState extends State<HotelHomePage> {
       var result = await response.stream.bytesToString();
 
       var finaResult = jsonDecode(result);
+      homeBannerModel = HomeBannerModel.fromJson(finaResult);
 
-      setState(() {
-        homeBannerModel = HomeBannerModel.fromJson(finaResult);
-
-        print(homeBannerModel?.data?.length);
-      });
+      print(homeBannerModel?.data?.length);
+      setState(() {});
     } else {
       print(response.reasonPhrase);
     }
@@ -817,7 +815,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
         images.add(i["image"]);
         city.add(i["title"]);
       }
-      setState(() {});
+      // setState(() {});
     } else {
       print(response.reasonPhrase);
     }

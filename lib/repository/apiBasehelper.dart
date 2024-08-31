@@ -50,7 +50,7 @@ class ApiBaseHelper {
       ).timeout(const Duration(seconds: timeOut));
 
       log('${response.statusCode}');
-
+      log('${headers}');
       responseJson = _response(response);
     } on SocketException catch (e) {
       throw ApiException('No Internet connection');

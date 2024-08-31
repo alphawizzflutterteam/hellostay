@@ -35,6 +35,8 @@ class Data {
   String? description;
   String? credit;
   String? debit;
+  String? remarks;
+
   int? refrenceId;
   String? refrenceType;
   int? createUser;
@@ -43,17 +45,18 @@ class Data {
 
   Data(
       {this.id,
-        this.userId,
-        this.transactionId,
-        this.title,
-        this.description,
-        this.credit,
-        this.debit,
-        this.refrenceId,
-        this.refrenceType,
-        this.createUser,
-        this.createdAt,
-        this.updatedAt});
+      this.userId,
+      this.transactionId,
+      this.title,
+      this.description,
+      this.credit,
+      this.debit,
+      this.remarks,
+      this.refrenceId,
+      this.refrenceType,
+      this.createUser,
+      this.createdAt,
+      this.updatedAt});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -63,6 +66,7 @@ class Data {
     description = json['description'];
     credit = json['credit'];
     debit = json['debit'];
+    remarks = json['remarks'];
     refrenceId = json['refrence_id'];
     refrenceType = json['refrence_type'];
     createUser = json['create_user'];
@@ -79,6 +83,7 @@ class Data {
     data['description'] = this.description;
     data['credit'] = this.credit;
     data['debit'] = this.debit;
+    data['remarks'] = this.remarks;
     data['refrence_id'] = this.refrenceId;
     data['refrence_type'] = this.refrenceType;
     data['create_user'] = this.createUser;

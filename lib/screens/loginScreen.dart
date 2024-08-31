@@ -437,6 +437,7 @@ class _LoginPageState extends State<LoginPage> {
 
       print("mobile");
       if (error == 1) {
+        print(msg);
         // var otp = getData['data'].toString();
         // customSnackbar(context, msg.toString());
         Navigator.push(
