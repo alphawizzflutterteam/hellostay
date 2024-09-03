@@ -106,7 +106,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                               )
                             : CircleAvatar(
-                                backgroundImage: NetworkImage("$userimagedata"),
+                                backgroundImage: NetworkImage(
+                                    "${getUserDataResponse?.data.avatarUrl}"),
                                 radius: 50,
                                 child: const Icon(
                                   Icons.camera_alt_outlined,

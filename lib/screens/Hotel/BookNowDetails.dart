@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hellostay/constants/colors.dart';
 import 'package:hellostay/model/coupon_model.dart';
 import 'package:hellostay/model/hotel_detail_response.dart';
@@ -155,6 +156,7 @@ class _BookNowDetailsState extends State<BookNowDetails> {
 
       // print(response);
     } else {
+      Fluttertoast.showToast(msg: couponMessage);
       print("not apply coupan");
       print(response.reasonPhrase);
     }
@@ -595,6 +597,7 @@ class _BookNowDetailsState extends State<BookNowDetails> {
                                       // selectedOptionCurrent=value.toString();
                                       await couponRemove();
                                       selectedOption = value.toString();
+                                      setState(() {});
                                       couponApply();
                                       // setState(() {
                                       //

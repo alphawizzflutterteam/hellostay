@@ -76,8 +76,8 @@ class Booking {
   dynamic number;
   dynamic paid;
   String? payNow;
-  int? walletCreditUsed;
-  int? walletTotalUsed;
+  dynamic? walletCreditUsed;
+  dynamic? walletTotalUsed;
   dynamic walletTransactionId;
   dynamic isRefundWallet;
   dynamic isPaid;

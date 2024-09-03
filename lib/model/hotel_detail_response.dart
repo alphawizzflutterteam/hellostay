@@ -799,7 +799,7 @@ class Child {
         id: json["id"],
         title: json["title"],
         content: json["content"],
-        imageId: json["image_id"],
+        imageId: /*json["image_id"]*/ '',
         icon: json["icon"],
         attrId: json["attr_id"],
         slug: json["slug"],
