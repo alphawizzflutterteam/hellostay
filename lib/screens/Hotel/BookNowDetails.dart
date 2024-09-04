@@ -195,38 +195,41 @@ class _BookNowDetailsState extends State<BookNowDetails> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          content: Lottie.asset(
-            'assets/animation/bb.json',
-            height: 100, // Adjust the height of the animation
-            width: 100, // Adjust the width of the animation
-            fit: BoxFit.contain,
-          ),
-          actions: [
-            Center(
-                child: Column(
-              children: [
-                const Text(
-                  'Copoun apply successfully. ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              content: Lottie.asset(
+                'assets/animation/bb.json',
+                height: 100, // Adjust the height of the animation
+                width: 100, // Adjust the width of the animation
+                fit: BoxFit.contain,
+              ),
+              actions: [
+                Center(
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Coupon applied successfully.',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'You Saved ${checkoutModel?.booking?.couponAmount ?? ""}',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  'You Saved ${checkoutModel?.booking?.couponAmount ?? ""} ',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                const SizedBox(height: 10),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('OK'),
                 ),
               ],
-            )),
-            const SizedBox(
-              height: 10,
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('OK'),
-            ),
-          ],
-          elevation: 5,
+              elevation: 5,
+            );
+          },
         );
       },
     );
