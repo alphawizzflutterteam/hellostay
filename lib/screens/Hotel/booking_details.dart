@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -641,7 +642,7 @@ class _BookingDetailsState extends State<BookingDetails>
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16)),
                         Text(
-                          "${bookingDetailsmodel?.gateway?.name}",
+                          "${bookingDetailsmodel?.booking?.gateway}",
                           style: TextStyle(
                               fontFamily: "rubic",
                               color: AppColors.primary,
@@ -731,6 +732,56 @@ class _BookingDetailsState extends State<BookingDetails>
                     SizedBox(
                       height: 10,
                     ),
+                    bookingDetailsmodel
+                        ?.booking?.cancelReason ==
+                        null
+                        ? SizedBox() :   Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Note: ",
+                          style: const TextStyle(
+                              color: AppColors.blackTemp,
+                              fontFamily: "rubic",
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
+                        Expanded(
+                          child: Text(
+                              "${ bookingDetailsmodel
+                                  ?.booking?.cancelReason}",
+                            style: TextStyle(
+                                color: AppColors.blackTemp,
+                                fontFamily: "rubic",
+                                fontSize: 16),),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    bookingDetailsmodel
+                        ?.booking?.cancelReason ==
+                        null
+                        ? SizedBox() :    const Divider(),
+                    bookingDetailsmodel
+                        ?.booking?.cancelReason ==
+                        null
+                        ? SizedBox() :  SizedBox(
+                      height: 10,
+                    ),
+                    // bookingDetailsmodel
+                    //     ?.booking?.cancelReason ==
+                    //     null
+                    //     ? SizedBox()
+                    //     : Text(
+                    //   'Note: ${ bookingDetailsmodel
+                    //       ?.booking?.cancelReason}',
+                    //   style: const TextStyle(
+                    //       fontSize: 15.0,
+                    //       fontFamily: 'rubic'),
+                    // ),
                     Text("Policy : ",
                         style: TextStyle(
                             fontFamily: "rubic",

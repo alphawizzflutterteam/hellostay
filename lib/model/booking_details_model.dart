@@ -76,6 +76,7 @@ class Booking {
   dynamic number;
   dynamic paid;
   String? payNow;
+  String? cancelReason;
   dynamic? walletCreditUsed;
   dynamic? walletTotalUsed;
   dynamic walletTransactionId;
@@ -129,6 +130,7 @@ class Booking {
       this.number,
       this.paid,
       this.payNow,
+      this.cancelReason,
       this.walletCreditUsed,
       this.walletTotalUsed,
       this.walletTransactionId,
@@ -182,6 +184,7 @@ class Booking {
     number = json['number'];
     paid = json['paid'];
     payNow = json['pay_now'];
+    cancelReason = json['cancel_reason'];
     walletCreditUsed = json['wallet_credit_used'];
     walletTotalUsed = json['wallet_total_used'];
     walletTransactionId = json['wallet_transaction_id'];
@@ -238,6 +241,7 @@ class Booking {
     data['number'] = this.number;
     data['paid'] = this.paid;
     data['pay_now'] = this.payNow;
+    data['cancel_reason'] = this.cancelReason;
     data['wallet_credit_used'] = this.walletCreditUsed;
     data['wallet_total_used'] = this.walletTotalUsed;
     data['wallet_transaction_id'] = this.walletTransactionId;

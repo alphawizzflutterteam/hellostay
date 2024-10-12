@@ -54,6 +54,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
     http.StreamedResponse response = await request.send();
 
+    print(request.url);
+
     if (response.statusCode == 200) {
       var result = await response.stream.bytesToString();
       print("kkk");

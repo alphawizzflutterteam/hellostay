@@ -409,9 +409,9 @@ class _ReferAndEranScreenState extends State<ReferAndEranScreen> {
   bool iconVisible = true;
   Future<void> share({String? referCode}) async {
     FlutterShare.share(
-        title: 'Refer and Eran',
-        text: widget.referCode ?? "",
-        linkUrl: 'Refer and Eran',
+        title: 'Refer and Earn',
+        text: "Referral Code: ${widget.referCode ?? " "}",
+        linkUrl: 'Refer and Earn\n\nGrab unbeatable deals by downloading the HELLOSTAY app here: (Link). Sign up now and enjoy Rs. 150 off plus 25% OFF your first booking with code WELCOME. Don’t miss out—offer valid for a limited time!\nHelloStay: Your smart way to travel and save!',
         chooserTitle: 'Example Chooser Title');
   }
 }

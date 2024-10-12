@@ -97,6 +97,7 @@ class _MyprofileScrState extends State<MyprofileScr> {
   }
 
   GetUserData?getUserData;
+  String refferalCode='';
   Future<void> getUserDataaa() async {
 
 
@@ -119,6 +120,7 @@ class _MyprofileScrState extends State<MyprofileScr> {
       if(finalresult['status']==1){
         setState(() {
           getUserData=GetUserData.fromJson(finalresult);
+          refferalCode=getUserData?.data.referralCode ?? '';
 
           isLoading = false;
         });
@@ -149,7 +151,7 @@ class _MyprofileScrState extends State<MyprofileScr> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body:  getUserData  == null  && islogin==true  ?   Center(child: CircularProgressIndicator())  : Column(
         children: [
           SizedBox(height: 50,),
           islogin==true?
@@ -169,7 +171,7 @@ class _MyprofileScrState extends State<MyprofileScr> {
                   radius: 28,
                   child: CircleAvatar(
                     backgroundImage: NetworkImage('${getUserData?.data.avatarUrl??""}'),
-                    child: Center(child: Icon(Icons.person_outline_outlined,size: 30,),),
+                    child:  getUserData?.data.avatarUrl  == null ?   Center(child:   Icon(Icons.person_outline_outlined,size: 30,),)  : SizedBox(),
                     radius: 25,),
                 ),
                 // Container(
