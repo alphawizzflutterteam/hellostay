@@ -106,7 +106,7 @@ class _MyWalletState extends State<MyWallet> {
 
   Future<void> openRazorpay() async {
     var options = {
-      'key': 'rzp_test_1DP5mmOlF5G5ag',
+      'key': 'rzp_live_MmLFC6z5L7yGRk',
       'amount': double.parse(addAmountCtr.text ?? '0.0').toInt() * 100,
       'description': 'Hotel..',
       //'send_sms_hash':true,

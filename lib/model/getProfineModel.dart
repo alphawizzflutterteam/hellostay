@@ -156,7 +156,7 @@ class GetUserDataListModel {
     locale: json["locale"]??"",
     userName: json["user_name"] ?? "",
     verifySubmitStatus: json["verify_submit_status"]??"",
-    isVerified: json["is_verified"]??"",
+    isVerified: json["is_verified"].toString()??"",
     activeStatus: json["active_status"].toString()??"",
     darkMode: json["dark_mode"].toString()??"",
     messengerColor: json["messenger_color"]??"",

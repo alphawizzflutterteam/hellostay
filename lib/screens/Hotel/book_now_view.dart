@@ -436,7 +436,7 @@ finalBookingApi() async {
     //   pricerazorpayy= int.parse(totalValue.toString()) * 100;
     // }
     var options = {
-      'key': 'rzp_test_1DP5mmOlF5G5ag',
+      'key': 'rzp_live_MmLFC6z5L7yGRk',
       'amount': price*100,
       'name': 'Assignment-assist',
       'description': 'Assignment-assist',

@@ -100,7 +100,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
     super.initState();
 
     ///
-
+    getNotificationApi();
     _controller.text =
         "Suggestion(description: Bengaluru, Karnataka, India, placeId: ChIJbU60yXAWrjsR4E9-UejD3_g).description";
     searchC.text = "Bengaluru, Karnataka, India";
@@ -152,6 +152,42 @@ class _HotelHomePageState extends State<HotelHomePage> {
 
     print("${token}");
   }
+  getNotificationApi() async {
+ 
+    var headers = {
+      'Authorization': 'Bearer $authToken'
+    };
+    var request = http.Request('GET', Uri.parse('${baseUrl1}notifications'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    print(request.url);
+
+    if (response.statusCode == 200) {
+      var result = await response.stream.bytesToString();
+      // print("kkk");
+      var finaResult = jsonDecode(result);
+      // print("cccc");
+      //  print(await response.stream.bytesToString());
+      setState(() {
+       
+        newNotificationCount=finaResult['count'];
+        print('---count----${finaResult['count']}');
+        // newNotificationCount=5;
+      
+
+        // isLoading = false;
+      });
+
+    }
+    else {
+      print(response.reasonPhrase);
+     
+    }
+
+  }
 
   // Payload? cityId;
 
@@ -167,6 +203,8 @@ class _HotelHomePageState extends State<HotelHomePage> {
   int childrenCount = 0;
   List<int> childrenAges = List.filled(0, 0);
 
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+  new GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -246,10 +284,27 @@ class _HotelHomePageState extends State<HotelHomePage> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => NotificationScreen()));
+                      builder: (context) => NotificationScreen())).then((value){
+                getNotificationApi();
+              });
             },
-            child: const Icon(Icons.notifications_active_outlined,
-                color: AppColors.faqanswerColor)),
+            child: Stack(
+              children: [
+                Center(
+                  child: Container(
+                    width: 50,
+                    child: Icon(Icons.notifications_none,
+                        color: AppColors.faqanswerColor),
+                  ),
+                ),
+            newNotificationCount > 0  ?       Positioned(
+                  top: 20,
+                    right: 0,
+                    left: 7,
+                    child: CircleAvatar(backgroundColor: Colors.red,radius: 4,))  : SizedBox()
+              ],
+            )
+        ),
         title: Container(
           height: 70,
           width: 150,
@@ -283,7 +338,13 @@ class _HotelHomePageState extends State<HotelHomePage> {
           )
         ],
       ),
-      body: CustomScrollView(
+      body:RefreshIndicator(
+      color: Colors.red,
+    key: _refreshIndicatorKey,
+    onRefresh: () =>getNotificationApi(),
+      child:
+
+      CustomScrollView(
         slivers: <Widget>[
           /* SliverAppBar(
             title: Container(
@@ -691,7 +752,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
               return _buildRooms(context, index);
             }, childCount: 100,),
           )*/
-        ],
+        ],)
       ),
     );
   }

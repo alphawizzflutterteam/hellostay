@@ -1,12 +1,14 @@
 class NotificationModel {
   NotificationData? data;
   int? status;
+  int? count;
 
   NotificationModel({this.data, this.status});
 
   NotificationModel.fromJson(Map<String, dynamic> json) {
     data = json['data'] != null ? new NotificationData.fromJson(json['data']) : null;
     status = json['status'];
+    count = json['count'];
   }
 
   Map<String, dynamic> toJson() {

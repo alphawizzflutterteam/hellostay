@@ -62,8 +62,12 @@ class _BookNowDetailsState extends State<BookNowDetails> {
   }
 
   CheckoutModel? checkoutModel;
-
+bool isLoading=false;
   Future<void> getCheckOutApi() async {
+    isLoading=true;
+    setState(() {
+
+    });
     var request = http.Request(
         'GET',
         Uri.parse(
@@ -79,12 +83,17 @@ class _BookNowDetailsState extends State<BookNowDetails> {
       //  print(await response.stream.bytesToString());
       checkoutModel = CheckoutModel.fromJson(finaResult);
       print("--------cccccccccc---------");
+      isLoading=false;
       setState(() {
-        //   print(homeBannerModel?.data?.length);
+
       });
       print(request.url);
     } else {
       print(response.reasonPhrase);
+      isLoading=false;
+      setState(() {
+
+      });
     }
   }
 
@@ -253,7 +262,7 @@ class _BookNowDetailsState extends State<BookNowDetails> {
           ),
         ),
       ),
-      body: Container(
+      body: isLoading ?  Center(child: CircularProgressIndicator()) :  Container(
         height: double.infinity,
         width: double.infinity,
         child: SingleChildScrollView(
@@ -948,7 +957,7 @@ class _BookNowDetailsState extends State<BookNowDetails> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Container(
+      bottomNavigationBar:isLoading ?  SizedBox() :  Container(
         height: 80,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15), color: Colors.black),

@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants/colors.dart';
 import '../../model/notification_model.dart';
+int newNotificationCount=0;
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
 
@@ -58,13 +59,16 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
     if (response.statusCode == 200) {
       var result = await response.stream.bytesToString();
-      print("kkk");
+      // print("kkk");
       var finaResult = jsonDecode(result);
-      print("cccc");
+      // print("cccc");
       //  print(await response.stream.bytesToString());
       setState(() {
         notificationModel=NotificationModel.fromJson(finaResult);
+        newNotificationCount=finaResult['count'];
+        // newNotificationCount=5;
         loading=false;
+        readNotificationApi();
 
        // isLoading = false;
       });
@@ -73,6 +77,42 @@ class _NotificationScreenState extends State<NotificationScreen> {
     else {
     print(response.reasonPhrase);
     loading=false;
+    }
+
+  }
+
+  readNotificationApi() async {
+
+    var headers = {
+      'Authorization': 'Bearer $authToken'
+    };
+    var request = http.Request('GET', Uri.parse('${baseUrl1}mark-read'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    print(request.url);
+
+    if (response.statusCode == 200) {
+      var result = await response.stream.bytesToString();
+      // print("kkk");
+      // var finaResult = jsonDecode(result);
+      // print("cccc");
+      //  print(await response.stream.bytesToString());
+      // setState(() {
+      //   notificationModel=NotificationModel.fromJson(finaResult);
+      //   newNotificationCount=finaResult['count'];
+      //   newNotificationCount=5;
+      //   loading=false;
+      //
+      //  // isLoading = false;
+      // });
+
+    }
+    else {
+    print(response.reasonPhrase);
+
     }
 
   }

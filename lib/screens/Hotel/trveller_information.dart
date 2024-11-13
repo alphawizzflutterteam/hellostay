@@ -103,7 +103,7 @@ class _TravellerInformationState extends State<TravellerInformation> {
     Fluttertoast.showToast(
         msg: "SUCCESS: ${response.paymentId}", toastLength: Toast.LENGTH_SHORT);
     paymentSucess = true;
-    setState(() {});
+
     bookingApi(response.paymentId ?? "");
   }
 
@@ -127,9 +127,9 @@ class _TravellerInformationState extends State<TravellerInformation> {
         toastLength: Toast.LENGTH_SHORT);
   }
 
-  void openCheckout(double amount) {
+  Future<void> openCheckout(double amount) async {
     var options = {
-      'key': 'rzp_test_1DP5mmOlF5G5ag',
+      'key': 'rzp_live_MmLFC6z5L7yGRk',
       'amount': amount.toInt() * 100,
       // 'amount': double.parse(widget.totalAmount ?? '0.0').toInt() * 100 ,
       'description': 'Hotel..',
@@ -143,8 +143,9 @@ class _TravellerInformationState extends State<TravellerInformation> {
       debugPrint('Error--------: ${e}');
     }
   }
-
+bool isLoading=false;
   bookingApi(String paymentId) async {
+
 // print(_isChecked==true ? (double.parse(walletAmount ?? "0")  <= double.parse(widget.totalAmount ?? "0" ) ) ? walletAmount.toString() ?? "0" : widget.totalAmount.toString() ?? "0" : "0");
 // print("booking is ${widget.bookingId }");
 // print('token ---${authToken}');
@@ -211,6 +212,10 @@ class _TravellerInformationState extends State<TravellerInformation> {
       //  childrenCount1 = 0;
       //   room = 0;
       //   childrenCountListOfList = [];
+      isLoading=true;
+      // setState(() {
+      //
+      // });
       setState(() {});
 
       if (status.toString() == '1') {
@@ -245,7 +250,7 @@ class _TravellerInformationState extends State<TravellerInformation> {
     return data;
   }
 
-  void _openBottomSheet1(BuildContext context) {
+  Future<void> _openBottomSheet1(BuildContext context) async {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -392,7 +397,7 @@ class _TravellerInformationState extends State<TravellerInformation> {
 
                       SizedBox(height: 40),
                       if (remaningAmount > 0)
-                        Row(
+                        isLoading == true  ?  Center(child: CircularProgressIndicator())  :   Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             InkWell(
@@ -400,9 +405,11 @@ class _TravellerInformationState extends State<TravellerInformation> {
                                 paymentSucess = false;
                                 payByWallet = false;
                                 payAtHotel = true;
+                                isLoading=true;
                                 setState(() {
-                                  bookingApi('');
+
                                 });
+                                bookingApi('');
                               },
                               child: Container(
                                 // width: 100,
@@ -429,7 +436,12 @@ class _TravellerInformationState extends State<TravellerInformation> {
                                 payAtHotel = false;
                                 setState(() {});
 
-                                openCheckout(remaningAmount);
+                                openCheckout(remaningAmount).then((value){
+                                  isLoading=true;
+                                  setState(() {
+
+                                  });
+                                });
                               },
                               child: Container(
                                 // width: 100,
@@ -502,16 +514,20 @@ class _TravellerInformationState extends State<TravellerInformation> {
                       if (remaningAmount <= 0)
                         InkWell(
                           onTap: () {
+                            isLoading=true;
+                            setState(() {
+
+                            });
                             bookingApi('');
                           },
-                          child: Container(
+                          child: isLoading == true  ?  Center(child: CircularProgressIndicator())  : Container(
                             // width: 100,
                             height: 40,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: AppColors.primary),
                             child: Center(
-                                child: Text(
+                                child:  Text(
                               "Book Now    ₹ 0.0",
                               style: TextStyle(
                                   color: AppColors.whiteTemp,
@@ -1073,7 +1089,12 @@ class _TravellerInformationState extends State<TravellerInformation> {
                       onTap: () {
                         //
                         if (_formKey.currentState!.validate()) {
-                          _openBottomSheet1(context);
+                          _openBottomSheet1(context).then((value){
+                            isLoading=false;
+                            setState(() {
+
+                            });
+                          });
                         }
                       },
                       child: Center(
