@@ -191,7 +191,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
         setState(() {
           // otp = getData['data'].toString();
         });
-        customSnackbar(context, msg.toString());
+        customSnackbar(context,'Opt Send Successfully');
         setState(() {
           isLoading = false;
         });

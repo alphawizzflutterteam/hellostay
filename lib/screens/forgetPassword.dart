@@ -154,6 +154,7 @@ class _forgotPasswordState extends State<forgotPassword> {
 
       print("mobile");
       if (error == 1) {
+        customSnackbar(context,'Opt Send Successfully');
         // var otp = getData['data'].toString();
         // customSnackbar(context, msg.toString());
         Navigator.push(
